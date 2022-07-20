@@ -13,7 +13,7 @@ function App() {
         <div>
           <Routes history={history}>
             {/* <IndexRoute component={<Login />} /> */}
-            <Route path="/login" component={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/layout" element={<Layout />}>
               <Route path="menu" element={<Menu />} />
             </Route>

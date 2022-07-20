@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import http from '../../../utils';
 import '@/assets/css/menu.scss';
-export default class index extends Component {
+export default class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
