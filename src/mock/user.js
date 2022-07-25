@@ -1,45 +1,44 @@
-import Mock from 'mockjs'
+import Mock from "mockjs";
 
 // mock方法,详细的可以看官方文档
-const Random = Mock.Random
+const Random = Mock.Random;
 
 export default [
   {
-    url: '/user/login',
-    type: 'post',
-    response: config => {
-        let request = JSON.parse(config.body);
-        if (request.username === 'guest' && request.password === 'guest') {
-            return {
-                code: 200,
-                data: {token: 'youaretheappleinmyeyes'}
-              }
-        }
+    url: "/user/login",
+    type: "post",
+    response: (config) => {
+      let request = JSON.parse(config.body);
+      if (request.username === "guest" && request.password === "guest") {
         return {
-            code: 300,
-            data: {msg: '用户名或密码不正确'}
-          }
-    }
+          code: 200,
+          data: { token: "youaretheappleinmyeyes" },
+        };
+      }
+      return {
+        code: 300,
+        data: { msg: "用户名或密码不正确" },
+      };
+    },
   },
   {
-    url: '/user/file',
-    type: 'get',
+    url: "/user/file",
+    type: "get",
     response: () => {
-
-      let fileList = []
+      let fileList = [];
       for (let i = 0; i < 6; i++) {
-        let file = {}
-        file.uid = Random.id()
-        file.name = Random.title(3, 5)
-        file.url = Random.image('200x100', '#50B347', '#FFF', Random.title(1))
-        fileList.push(file)
+        let file = {};
+        file.uid = Random.id();
+        file.name = Random.title(3, 5);
+        file.url = Random.image("200x100", "#50B347", "#FFF", Random.title(1));
+        fileList.push(file);
       }
       return {
         code: 200,
         data: {
-          fileList
-        }
-      }
-    }
-  }
-]
+          fileList,
+        },
+      };
+    },
+  },
+];
