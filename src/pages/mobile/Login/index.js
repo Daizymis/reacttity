@@ -4,9 +4,11 @@ import utils from "../../../utils";
 import { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { createBrowserHistory } from "history";
+import { useNavigate } from "react-router";
 function Login(props) {
   console.log(props);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {}, []);
   const onFinish = (values) => {
     if (values.password && values.username) {
@@ -24,12 +26,13 @@ function Login(props) {
 
           // const shortId = Cookies.getCookie("shortId");
           // const shortUrl = Cookies.getCookie("shortUrl");
-          let history = createBrowserHistory();
-          // if (shortUrl != null) {
-          //   history.push("/e/" + shortId + "/" + shortUrl);
-          // } else {
-          //   history.push("/menu");
-          // }
+          if (res.shortUrl != null) {
+            navigate("/e/" + shortId + "/" + shortUrl);
+          } else {
+            navigate("/menu");
+          }
+
+          navigate("/menu");
         } else {
           message.error(res.data.msg);
         }
