@@ -25,7 +25,14 @@ function App() {
                 </React.Suspense>
               }
             />
-            <Route path="/layout" element={<Layout />}>
+            <Route
+              path="/"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <Layout />
+                </React.Suspense>
+              }
+            >
               <Route
                 path="menu"
                 element={
@@ -33,16 +40,9 @@ function App() {
                     <Menu />
                   </React.Suspense>
                 }
+                footermenu=""
               />
             </Route>
-            <Route
-              path="/menu"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <Menu />
-                </React.Suspense>
-              }
-            />
             <Route
               path="/todolist"
               element={

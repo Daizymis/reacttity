@@ -5,8 +5,11 @@ import myDefault from "@/assets/img/mobile/my.png";
 import myActive from "@/assets/img/mobile/my-click.png";
 import http from "../../../utils";
 import axios from "axios";
+import { Outlet } from "react-router-dom";
+import "@/assets/css/layout.scss";
+import { withRouter } from '../../../hoc/withRouter'
 
-export default class index extends Component {
+class Layout extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +31,10 @@ export default class index extends Component {
       ],
     };
     this.getMenu();
+    console.log(props);
+  }
+
+  componentDidMount(){
   }
   getMenu() {
     console.log(http);
@@ -61,15 +68,17 @@ export default class index extends Component {
     ];
     return (
       <div>
-        <p>工作台</p>
         <Outlet />
-        {this.state.footMenu.map((item) => (
-          <div key={item.id}>
-            <img src={item.img} className="img-nav" />
-            <div>{item.name}</div>
-          </div>
-        ))}
+        <div className="footer">
+          {this.state.footMenu.map((item) => (
+            <div className="item" key={item.id}>
+              <img src={item.img} className="img-nav" />
+              <div>{item.name}</div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
 }
+export default Layout;

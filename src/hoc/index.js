@@ -9,7 +9,7 @@ export const decoratorWithNameHight = (height) =>{
             componentWillMount() {
                 let username = localStorage.getItem('myName');
                 this.setState({
-                    name: username || '';
+                    name: username || ''
                 })
             }
             render () {
