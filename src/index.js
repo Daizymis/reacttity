@@ -12,6 +12,8 @@ if (process.env.NODE_ENV === "development") {
 }
 import "@/utils";
 import { PersistGate } from "redux-persist/integration/react";
+
+import './locales';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -2,3 +2,13 @@
   margin: 0;
   padding: 0;
 }
+.locale-icon {
+  display: inline-block;
+  border: 1px solid #dddddd;
+  border-radius: 17px;
+  padding: 5px 10px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 999;
+}
