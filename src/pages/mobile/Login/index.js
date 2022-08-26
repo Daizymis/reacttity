@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox, message } from "antd";
+import { Form, Input, Button, Checkbox, message, Row, Col } from "antd";
 import "@/assets/css/login.scss";
 import utils from "../../../utils";
 import { useEffect, useState } from "react";
@@ -42,20 +42,10 @@ function Login(props) {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const [user, setUser] = useState();
-  const [count, setCount] = useState();
   const test = () => {
-    setUser("hello world");
-    setUser("ooooo");
-    setCount(33);
-    setCount(22);
   };
   return (
     <div className="login-nav">
-      <span>
-        {count}
-        {user}
-      </span>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -90,13 +80,19 @@ function Login(props) {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 0, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-          <Button type="primary" htmlType="submit" onClick={test}>
-            test
-          </Button>
+        <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
+          <Row>
+            <Col span={12}>
+              <Button type="primary" htmlType="submit" onClick={test}>
+                Cancel
+              </Button>
+            </Col>
+            <Col span={12}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Col>
+          </Row>
         </Form.Item>
       </Form>
     </div>

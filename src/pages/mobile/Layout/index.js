@@ -37,7 +37,6 @@ class Layout extends Component {
   componentDidMount(){
   }
   getMenu() {
-    console.log(http);
     axios({
       url: "https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=7406159",
       method: "get",

@@ -1,0 +1,27 @@
+.loading {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 50%;
+  &-icon {
+    color: #409eff;
+    font-size: 15px;
+    -webkit-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
+    margin: 0 3px;
+    &::before {
+      content: "\e6cf";
+    }
+  }
+}
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
