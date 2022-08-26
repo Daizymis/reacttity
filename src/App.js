@@ -23,7 +23,6 @@ const Index = () => {
       navigate('/login');
     }
   },[pathname, locale]);
-  console.log(locale);
   return <div>
     <div>
       <LocaleIcon></LocaleIcon>

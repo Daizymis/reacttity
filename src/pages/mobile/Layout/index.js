@@ -15,7 +15,6 @@ function Layout(props) {
   const {t} = useTranslation();
   useEffect(() => {
     getMenu();
-    console.log(props);
   }, []);
 
   const getMenu = () => {

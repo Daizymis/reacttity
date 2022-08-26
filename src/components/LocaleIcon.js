@@ -10,7 +10,6 @@ function LocaleIcon(props) {
     return <span className="locale-icon" onClick={() => changeLanguage()}>{t(i18n.language || 'zhCN')}</span>
 }
 const mapDispatchToProps = (dispatch) => {
-    console.log(dispatch);
     return {
       change(value) {
         dispatch({

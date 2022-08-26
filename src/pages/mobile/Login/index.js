@@ -1,13 +1,11 @@
 import { Form, Input, Button, Checkbox, message, Row, Col } from "antd";
 import "@/assets/css/login.scss";
 import utils from "../../../utils";
-import { useEffect, useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { connect } from "react-redux";
 import { createBrowserHistory } from "history";
 import { useNavigate } from "react-router";
 function Login(props) {
-  console.log(props);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {}, []);
   const onFinish = (values) => {

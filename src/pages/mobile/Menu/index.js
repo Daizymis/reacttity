@@ -12,14 +12,11 @@ function Menu(props) {
     http.get("/menus").then((res) => {
       if (res.code === 200) {
         setMenu(res.data);
-        console.log(res.data);
       }
     });
   };
   const toList = (menu) => {
-    console.log(menu);
-    
-    navigate(`/todolist/${menu.flowType}`);
+    navigate(`/todolist/${menu.type}`);
   };
   return (
     <div>
