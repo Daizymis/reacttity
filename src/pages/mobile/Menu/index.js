@@ -26,7 +26,7 @@ function Menu(props) {
             <p className="menu-title">{item.menuTypeName}</p>
             <div className="flex-wrap">
               {item.menuList?.map((menu) => (
-                <div key={menu.id} onClick={()=>toList(menu)}>
+                <div className="menu-nav" key={menu.id} onClick={()=>toList(menu)}>
                   <img
                     src={require(`../../../assets/img/mobile/module1.png`)}
                     className="img-nav"

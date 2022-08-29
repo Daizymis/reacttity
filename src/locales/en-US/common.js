@@ -4,5 +4,6 @@ export default {
     zhCN: '中文',
     enUS:'English',
     my:'my',
-    workbench: 'workbench'
+    workbench: 'workbench',
+    logOut: 'Log Out'
 }

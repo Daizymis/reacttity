@@ -1,5 +1,6 @@
 import common from "./common";
-
+import SystemBaseInfo from "./systemBaseInfo";
 export default {
-    ...common
+    ...common,
+    "systemBaseInfo": {...SystemBaseInfo}
 }

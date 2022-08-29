@@ -6,7 +6,7 @@ import zh_CN from "./zh_CN";
 i18n.use(initReactI18next).init({
     resources:{enUS: {translation: enUS}, zhCN: {translation: zh_CN}},
     lng: localStorage.getItem('locale') || 'zhCN',
-    keySeparator: false,
+    // keySeparator: false,
     interpolation: {
         escapeValue: false
     }

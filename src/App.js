@@ -23,11 +23,9 @@ const Index = () => {
       navigate('/login');
     }
   },[pathname, locale]);
-  return <div>
-    <div>
+  return <div className="app">
       <LocaleIcon></LocaleIcon>
       <Router></Router>
-    </div>
   </div>
 }
 

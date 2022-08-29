@@ -3,11 +3,13 @@ import { connect,useStore } from "react-redux";
 function LocaleIcon(props) {
     const {t, i18n} = useTranslation();
     const { locale} = useStore().getState();
+    console.log(i18n.language, locale);
     const changeLanguage = () => {
         i18n.changeLanguage(locale === 'zhCN' ? 'enUS' : 'zhCN');
         props.change(locale);
+        // window.location.reload()
     }
-    return <span className="locale-icon" onClick={() => changeLanguage()}>{t(i18n.language || 'zhCN')}</span>
+    return <span className="locale-icon" onClick={() => changeLanguage()}>{t(locale || 'zhCN')}</span>
 }
 const mapDispatchToProps = (dispatch) => {
     return {

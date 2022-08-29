@@ -40,8 +40,7 @@ function Login(props) {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const test = () => {
-  };
+  const test = () => {};
   return (
     <div className="login-nav">
       <Form
@@ -80,16 +79,9 @@ function Login(props) {
 
         <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
           <Row>
-            <Col span={12}>
-              <Button type="primary" htmlType="submit" onClick={test}>
-                Cancel
-              </Button>
-            </Col>
-            <Col span={12}>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Col>
+            <Button block type="primary" htmlType="submit">
+              Submit
+            </Button>
           </Row>
         </Form.Item>
       </Form>
