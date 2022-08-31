@@ -27,7 +27,7 @@ function My(props) {
   return (
     <>
       <div className="top-nav">
-        <img src="/css/img/mobile/my.png" className="my-img" />
+        <img src={require("@/assets/img/mobile/my.png")} className="my-img" />
         <span>
           <div className="name-nav">{userInfo.username}</div>
           <div className="dept-nav">xx部门 | 开发工程师</div>

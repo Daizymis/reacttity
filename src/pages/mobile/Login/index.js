@@ -1,20 +1,21 @@
 import { Form, Input, Button, Checkbox, message, Row, Col } from "antd";
 import "@/assets/css/login.scss";
 import utils from "../../../utils";
-import { useEffect } from "react";
 import { connect } from "react-redux";
-import { createBrowserHistory } from "history";
 import { useNavigate } from "react-router";
+import {LOGIN_OK} from '@/utils/code'
 function Login(props) {
   const navigate = useNavigate();
-  useEffect(() => {}, []);
+  // const { locale} = useStore().getState();
   const onFinish = (values) => {
     if (values.password && values.username) {
-      utils.http.post("/user/login", values).then((res) => {
+      values.language = 'CN';
+      utils.http.post("/api/loginCheck", values).then((res) => {
         localStorage.setItem("setToken", res.token || "");
-        if (res.code === 200) {
+        if (Number(res.code) === LOGIN_OK) {
           message.success("登录成功");
           props.login(values);
+          localStorage.setItem('setToken', res.token);
           // Cookies.setCookie("login", "LOGIN_OK");
           // if (values.remember) {
           //   Cookies.setCookie("isChecked", this.isChecked);
@@ -32,7 +33,7 @@ function Login(props) {
 
           navigate("/menu");
         } else {
-          message.error(res.data.msg);
+          message.error(res.message);
         }
       });
     }

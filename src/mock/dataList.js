@@ -5,7 +5,7 @@ const Random = Mock.Random;
 
 export default [
   {
-    url: "/menus",
+    url: "/getmenus?type=1",
     type: "get",
     response: (config) => {
       const menuList = [

@@ -12,9 +12,10 @@ import LocaleIcon from "./components/LocaleIcon";
 const Index = () => {
   const {pathname} = useLocation();
   const {userInfo, locale} = useStore().getState();
- 
+  const {i18n} = useTranslation();
   const navigate =useNavigate();
   useEffect(()=>{
+    console.log('llllllllllllllllll')
     if(userInfo?.username) {
       if(pathname === '/login') {
         navigate('/menu');
@@ -22,7 +23,7 @@ const Index = () => {
     }else {
       navigate('/login');
     }
-  },[pathname, locale]);
+  },[pathname, locale, i18n.language]);
   return <div className="app">
       <LocaleIcon></LocaleIcon>
       <Router></Router>

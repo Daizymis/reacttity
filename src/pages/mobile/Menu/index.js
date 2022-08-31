@@ -9,20 +9,20 @@ function Menu(props) {
     getMenus();
   }, []);
   const getMenus = () => {
-    http.get("/menus").then((res) => {
+    http.get("api/getmenus?type=1").then((res) => {
       if (res.code === 200) {
         setMenu(res.data);
       }
     });
   };
   const toList = (menu) => {
-    navigate(`/todolist/${menu.type}`);
+    navigate(`/${menu.route.replace('OListTable', 'todolist')}`);
   };
   return (
-    <div>
+    <div style={{paddingBottom: '1.2rem'}}>
       <div className="flex-wrap">
         {menus.map((item) => (
-          <div key={item.id}>
+          <div key={item.menuTypeName}>
             <p className="menu-title">{item.menuTypeName}</p>
             <div className="flex-wrap">
               {item.menuList?.map((menu) => (
@@ -31,7 +31,7 @@ function Menu(props) {
                     src={require(`../../../assets/img/mobile/module1.png`)}
                     className="img-nav"
                   />
-                  <div className="menu-name">{menu.muduleName}</div>
+                  <div className="menu-name">{menu.name}</div>
                 </div>
               ))}
             </div>

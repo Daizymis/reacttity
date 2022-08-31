@@ -7,7 +7,10 @@ function LocaleIcon(props) {
     const changeLanguage = () => {
         i18n.changeLanguage(locale === 'zhCN' ? 'enUS' : 'zhCN');
         props.change(locale);
-        // window.location.reload()
+        setTimeout(()=>{
+          window.location.reload()
+        }, 200)
+        
     }
     return <span className="locale-icon" onClick={() => changeLanguage()}>{t(locale || 'zhCN')}</span>
 }

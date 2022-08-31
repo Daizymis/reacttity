@@ -5,13 +5,13 @@ const Random = Mock.Random;
 
 export default [
   {
-    url: "/user/login",
+    url: "/loginCheck",
     type: "post",
     response: (config) => {
       let request = JSON.parse(config.body);
       if (request.username === "guest" && request.password === "guest") {
         return {
-          code: 200,
+          code: 201,
           data: { token: "youaretheappleinmyeyes" },
         };
       }

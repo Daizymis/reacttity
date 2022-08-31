@@ -20,19 +20,19 @@ function Layout(props) {
   }, []);
 
   const getMenu = () => {
-    axios({
-      url: "https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=7406159",
-      method: "get",
-      headers: {
-        "X-Host": "mall.film-ticket.cinema.list",
-      },
-    }).then((res) => {
+    // axios({
+    //   url: "https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=7406159",
+    //   method: "get",
+    //   headers: {
+    //     "X-Host": "mall.film-ticket.cinema.list",
+    //   },
+    // }).then((res) => {
       setFootMenu([
         {
           img: workspaceDefault,
           imgActive: workspaceActive,
           name: "workbench",
-          url: "/workbench",
+          url: "/menu",
         },
         {
           img: myDefault,
@@ -41,7 +41,7 @@ function Layout(props) {
           url: "/my",
         },
       ]);
-    });
+    // });
   };
   const location = useNavigate();
   const to = (url) =>{

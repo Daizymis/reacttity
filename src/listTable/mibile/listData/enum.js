@@ -1,3 +1,4 @@
+import i18n from "../../../locales";
 export const SortWay = {
     ASC:'asc',
     DESC:'desc'
@@ -39,46 +40,46 @@ export const flowTypeFormat = [
     {
       value: 0,
       color: '#FA8C16',
-      label: '未处理',
-    //   label: i18n.t('listPage.fstatus0'),
-      listdataurl: getProcessingList,
+      // label: '未处理',
+      label: i18n.t('listPage.fstatus0'),
+      listdataurl: 'getProcessingList',
       orderNameSelf: 'createtime'
     },
     {
       value: 0,
       color: '#ff976a',
-      title: '稍后处理',
-    //   label: i18n.t('listPage.marked'),
-      listdataurl: getLaterProcessingList,
+      // label: '稍后处理',
+      label: i18n.t('listPage.marked'),
+      listdataurl: 'getLaterProcessingList',
       orderNameSelf: 'createtime'
     },
     {
       value: 1,
       color: '#52C41A',
-      label: '已处理',
-    //   label: i18n.t('listPage.fstatus1'),
-      listdataurl: getProcessedList
+      // label: '已处理',
+      label: i18n.t('listPage.fstatus1'),
+      listdataurl: 'getProcessedList'
     },
     {
       value: 2,
       color: '#13C2C2',
-      label: '我发起的',
-    //   label: i18n.t('listPage.fstatus2'),
-      listdataurl: getMyProcessList
+      // label: '我发起的',
+      label: i18n.t('listPage.fstatus2'),
+      listdataurl: 'getMyProcessList'
     },
     {
       value: 3,
       color: '#FF4D4F',
-      label: '发起人已撤回',
-    //   label: i18n.t('listPage.fstatus3'),
-      listdataurl: getRetractedList
+      // label: '发起人已撤回',
+      label: i18n.t('listPage.fstatus3'),
+      listdataurl: 'getRetractedList'
     },
     {
       value: 4,
       color: '#1890FF',
-      label: '需关注',
-    //   label: i18n.t('listPage.fstatus4'),
-      listdataurl: getNeedAttentionList
+      // label: '需关注',
+      label: i18n.t('listPage.fstatus4'),
+      listdataurl: 'getNeedAttentionList'
     }
   ];
   //时间选择

@@ -1,8 +1,10 @@
-import { flowTypeFormat, myHandlingFormat, SortWay } from '../enum';
-const order = {
+import { flowTypeFormat, myHandlingFormat, SortWay } from './enum';
+const Order = {
+  type: 57,
   typeDesc: '下单',
   orderName: 'updatetime',
   orderBy: SortWay.ASC,
+  listdataurl:'',
   myDealStatus: {
     key: 'fstatus',
     format: myHandlingFormat,
@@ -45,4 +47,4 @@ const order = {
   ]
 };
 
-export default order;
+export default Order;
