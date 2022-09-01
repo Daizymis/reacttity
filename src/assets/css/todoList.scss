@@ -188,6 +188,7 @@
     font-size: 0.28rem;
     border-radius: 0.1rem;
     color: #fff;
+    white-space: nowrap;
   }
 }
 .divider-nav {
@@ -215,4 +216,12 @@
   &::after {
     margin-left: 16px;
   }
+}
+
+.filter-icon-btn {
+  background: url('../img/mobile/filter-icon.png') no-repeat;
+  width: 0.4rem;
+  height: 0.4rem;
+  background-size: contain;
+  margin: 0.45rem 0.35rem 0.35rem 0;
 }

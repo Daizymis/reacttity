@@ -1,15 +1,19 @@
+import { FilterOutline } from "@ant-design/icons";
 import { Input, Mask } from "antd-mobile";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { dealKeyReturnValue } from "../../../../utils";
+import ListFilter from "./list-filter";
 // import "@/assets/css/todoList.scss";
 const TopFilter = (props) => {
   const { t } = useTranslation();
   let [downMenuKey, setDownMenuKey] = useState(t("listPage.fstatus0"));
   let [showSheet, setShowSheet] = useState(false);
   let [value, setValue] = useState("");
+  console.log(props);
   const changeListType1 = (item) => {
     setDownMenuKey(item.label);
+    props.changeListType(item);
   };
   return (
     <div className="flex filter-nav">
@@ -45,7 +49,10 @@ const TopFilter = (props) => {
         }}
         style={{ marginLeft: "0.4rem" }}
       />
-
+      <div
+        class="filter-icon-btn"
+        onClick={()=>props.setFilterVisible(true)}
+      ></div>
       <Mask
         visible={showSheet}
         onMaskClick={() => setShowSheet(false)}

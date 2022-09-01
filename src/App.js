@@ -14,8 +14,8 @@ const Index = () => {
   const {userInfo, locale} = useStore().getState();
   const {i18n} = useTranslation();
   const navigate =useNavigate();
+  console.log(pathname.indexOf('todolist'));
   useEffect(()=>{
-    console.log('llllllllllllllllll')
     if(userInfo?.username) {
       if(pathname === '/login') {
         navigate('/menu');
@@ -25,7 +25,7 @@ const Index = () => {
     }
   },[pathname, locale, i18n.language]);
   return <div className="app">
-      <LocaleIcon></LocaleIcon>
+      {!~pathname.indexOf('todolist') && <LocaleIcon></LocaleIcon>}
       <Router></Router>
   </div>
 }

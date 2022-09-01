@@ -10,6 +10,8 @@ import { dealKeyReturnValue, dealKeyReturnValue1 } from "@/utils/index";
 import { throttle } from "../../../utils/util";
 import TopFilter from "./child/top-filter";
 import ListItem from "./child/list-item";
+import { useMemo } from "react";
+import ListFilter from "./child/list-filter";
 function TodoList(props) {
   let { type } = useParams();
   type = "ProjectApproval";
@@ -17,7 +19,11 @@ function TodoList(props) {
   let [hasMore, setHasMore] = useState(true);
   const { t } = useTranslation();
   const [total, setTotal] = useState(0);
-  let [listKeys, setListKeys] = useState(null);
+  let [listKeys, setListKeys] = useState(() => {
+    return listTableInfo["Order"];
+  });
+
+  let [listdataurl, setListdataurl] = useState("getProcessingList");
 
   let [listParams, setListParams] = useState({
     ordername: "",
@@ -25,18 +31,15 @@ function TodoList(props) {
     pageindex: 1,
     pagesize: 20,
   });
-
+  let [filterVisible, setFilterVisible] = useState(false);
   const reset = () => {};
-  useEffect(() => {
-    setListKeys(listTableInfo["Order"]);
-  }, []);
   const getTodoList = async () => {
     let obj = {
       ...listParams,
     };
 
     let url = listKeys.type
-      ? `/api/getProcessingList/${listKeys.type}`
+      ? `/api/${listdataurl}/${listKeys.type}`
       : `${listKeys.listdataurl}`;
     const res = await http.post(url, obj);
     setTotal(res.data.total);
@@ -57,21 +60,36 @@ function TodoList(props) {
       await getTodoList();
     }
   }
+  const changeListType = (item) => {
+    setListdataurl(item.listdataurl);
+    setListParams((prevState) => {
+      return { ...prevState, pageindex: 1 };
+    });
+    // getTodoList();
+  };
+  const returnFilterData = (item) => {
+    console.log(item);
+  };
   return (
     <div>
-      <TopFilter listKeys={listKeys}></TopFilter>
-      {/* <List> */}
+      {useMemo(() => {
+        return (
+          <TopFilter
+            listKeys={listKeys}
+            changeListType={changeListType}
+            setFilterVisible={setFilterVisible}
+          ></TopFilter>
+        );
+      }, [listKeys])}
+
       <div className="list">
         {listData?.map((item, index) => (
-          // <List.Item >
           <div className="list-item" key={index}>
             <div className="list-item-top">
-              {listKeys.flowType ? (
+              {listKeys.flowType && (
                 <div className="status">{t("listPage.status")}</div>
-              ) : (
-                ""
               )}
-              {listKeys.flowType ? (
+              {listKeys.flowType && (
                 <div
                   className="status"
                   style={{
@@ -90,8 +108,6 @@ function TodoList(props) {
                     ).label
                   }
                 </div>
-              ) : (
-                ""
               )}
             </div>
             <img
@@ -99,13 +115,20 @@ function TodoList(props) {
               alt=""
               className="dashed-line"
             />
-            <ListItem listKeys={listKeys} item={item}></ListItem>
+            <ListItem listKeys={listKeys} item={item} />
           </div>
-          // </List.Item>
         ))}
       </div>
-      {/* </List> */}
       <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
+
+      {filterVisible && (
+        <ListFilter
+          listKeys={listKeys}
+          setFilterVisible={setFilterVisible}
+          filterVisible={filterVisible}
+          returnFilterData={returnFilterData}
+        ></ListFilter>
+      )}
     </div>
   );
 }
