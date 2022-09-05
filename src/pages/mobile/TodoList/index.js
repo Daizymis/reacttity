@@ -22,7 +22,9 @@ function TodoList(props) {
   let [listKeys, setListKeys] = useState(() => {
     return listTableInfo["Order"];
   });
-
+  let [filterParams, setFilterParams] = useState({
+    searchInfo: {},
+  });
   let [listdataurl, setListdataurl] = useState("getProcessingList");
 
   let [listParams, setListParams] = useState({
@@ -31,8 +33,46 @@ function TodoList(props) {
     pageindex: 1,
     pagesize: 20,
   });
+  useEffect(()=>{
+    initSelectedData();
+  }, [])
   let [filterVisible, setFilterVisible] = useState(false);
-  const reset = () => {};
+  
+  const initSelectedData = (params) => {
+    const val = params ? params : listKeys;
+    // 筛选重置
+    //处理过滤参数默认值
+    setFilterParams({});
+    if (val.flowType && val.flowType.search) {
+      setFilterParams((prevState) => {
+        return { ...prevState, [val?.flowType?.key]: "" };
+      });
+    }
+    let initFilterParam = {};
+    val.listItem.forEach((item) => {
+      if (item.search) {
+        initFilterParam[item.key] = "";
+      }
+    });
+    setFilterParams((prevState) => {
+      return { ...prevState, searchInfo: Object.assign({}, val.searchInfo), ...initFilterParam, };
+    });
+    
+    console.log(initFilterParam);
+    setListParams((prevState) => {
+      return {
+        ...prevState,
+        ordername: val.orderName,
+        orderby: val.orderBy,
+      };
+    });
+  };
+  const reset = () => {
+    initSelectedData();
+  };
+  /**
+   * 列表展示
+   */
   const getTodoList = async () => {
     let obj = {
       ...listParams,
@@ -68,7 +108,7 @@ function TodoList(props) {
     // getTodoList();
   };
   const returnFilterData = (item) => {
-    console.log(item);
+    setFilterParams(prevState=>{return {...prevState, [item.key]: item.value}});
   };
   return (
     <div>
@@ -127,6 +167,8 @@ function TodoList(props) {
           setFilterVisible={setFilterVisible}
           filterVisible={filterVisible}
           returnFilterData={returnFilterData}
+          filterParams={filterParams}
+          reset ={reset}
         ></ListFilter>
       )}
     </div>

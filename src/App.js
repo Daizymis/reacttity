@@ -1,12 +1,10 @@
 import "@/App.scss";
-import { BrowserRouter, Routes, Route, useNavigate,useLocation } from "react-router-dom";
-import { createBrowserHistory } from "history";
-import React, { useEffect, useReducer } from "react";
+import { BrowserRouter, useNavigate,useLocation } from "react-router-dom";
+import React, { useEffect, } from "react";
 
 import Router from "./route/mobile/index";
-import { useDispatch, useStore } from "react-redux";
+import {  useStore } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { changeConfirmLocale } from "antd/lib/modal/locale";
 import LocaleIcon from "./components/LocaleIcon";
 
 const Index = () => {

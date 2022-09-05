@@ -3,7 +3,8 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "@/assets/css/listFilter.scss";
 const ListFilter = (props) => {
-  const { filterVisible, setFilterVisible, listKeys } = props;
+  console.log(props);
+  const { filterVisible, setFilterVisible, listKeys,  filterParams:checkedValue } = props;
   const { t } = useTranslation();
   const [timeSelected, setTimeSelected] = useState();
   const flowTypeSelect = useCallback(() => {
@@ -18,7 +19,6 @@ const ListFilter = (props) => {
     }
     return [];
   }, [listKeys]);
-  const [checkedValue, setCheckedValue] = useState({});
   const selectValue = (item, key, type) => {
     //筛选条件选择逻辑
     if (type === "date") {
@@ -78,7 +78,7 @@ const ListFilter = (props) => {
       bodyStyle={{
         borderTopLeftRadius: "8px",
         borderTopRightRadius: "8px",
-        maxHeight: "78%",
+        
       }}
     >
       <div className="list-filter">
@@ -92,7 +92,7 @@ const ListFilter = (props) => {
                     key={vIndex}
                     className={`${
                       vItem.value === checkedValue[listKeys.flowType.key]
-                        ? active
+                        ? 'active'
                         : ""
                     }`}
                     onClick={() => selectValue(vItem, listKeys.flowType.key)}
@@ -112,7 +112,7 @@ const ListFilter = (props) => {
                     <SearchBar
                       value={checkedValue[item.key]}
                       placeholder="请输入内容"
-                      onClick={openPick(item)}
+                      onSearch={()=>returnFilterData()}
                     />
                   </div>
                 </div>
