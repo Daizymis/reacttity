@@ -12,6 +12,8 @@ import TopFilter from "./child/top-filter";
 import ListItem from "./child/list-item";
 import { useMemo } from "react";
 import ListFilter from "./child/list-filter";
+import Loading from "../Loading";
+import useAsyncCallback from "../../../hook/useAsynState";
 function TodoList(props) {
   let { type } = useParams();
   type = "ProjectApproval";
@@ -35,6 +37,7 @@ function TodoList(props) {
   });
   useEffect(()=>{
     initSelectedData();
+    loadMore();
   }, [])
   let [filterVisible, setFilterVisible] = useState(false);
   
@@ -57,8 +60,6 @@ function TodoList(props) {
     setFilterParams((prevState) => {
       return { ...prevState, searchInfo: Object.assign({}, val.searchInfo), ...initFilterParam, };
     });
-    
-    console.log(initFilterParam);
     setListParams((prevState) => {
       return {
         ...prevState,
@@ -82,6 +83,7 @@ function TodoList(props) {
       ? `/api/${listdataurl}/${listKeys.type}`
       : `${listKeys.listdataurl}`;
     const res = await http.post(url, obj);
+    console.log(res);
     setTotal(res.data.total);
     if (listParams.pageindex === 1) {
       setListData(res?.data?.dataList);
@@ -100,16 +102,27 @@ function TodoList(props) {
       await getTodoList();
     }
   }
+  const func = useAsyncCallback(()=>{
+    loadMore();
+  })
   const changeListType = (item) => {
+    console.log(item);
     setListdataurl(item.listdataurl);
     setListParams((prevState) => {
       return { ...prevState, pageindex: 1 };
     });
-    // getTodoList();
+    setListData([]);
+    setHasMore(true);
+    func();
   };
   const returnFilterData = (item) => {
+    console.log(item);
     setFilterParams(prevState=>{return {...prevState, [item.key]: item.value}});
   };
+  const resetTable = () =>{
+    setListData([]);
+    setListParams(prevState => {return {...prevState,pageindex :1}} )
+  }
   return (
     <div>
       {useMemo(() => {
@@ -159,7 +172,7 @@ function TodoList(props) {
           </div>
         ))}
       </div>
-      <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
+      {listData?.length > 0 ? <InfiniteScroll loadMore={loadMore} hasMore={hasMore} /> : <Loading></Loading>}
 
       {filterVisible && (
         <ListFilter

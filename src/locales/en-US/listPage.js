@@ -46,44 +46,44 @@ const ListPage = {
     myHandlingFormat: [
       {
         key: 4,
-        lvalue: "<i class='yfont_blue'>Need to Focus on</i>",
+        lvalue: "<i className='yfont_blue'>Need to Focus on</i>",
         value: 'Need to Focus on'
       },
       {
         key: 0,
-        lvalue: "<i class='yfont_red'>Pending</i>",
+        lvalue: "<i className='yfont_red'>Pending</i>",
         value: 'Pending'
       },
       {
         key: 1,
-        lvalue: "<i class='yfont_green'>Solved</i>",
+        lvalue: "<i className='yfont_green'>Solved</i>",
         value: 'Solved'
       },
       {
         key: 2,
-        lvalue: "<i class='yfont_blue'>My Application</i>",
+        lvalue: "<i className='yfont_blue'>My Application</i>",
         value: 'My Application'
       },
       {
         key: 3,
-        lvalue: "<i class='yfont_red'>Withdrawn</i>",
+        lvalue: "<i className='yfont_red'>Withdrawn</i>",
         value: 'Withdrawn'
       }
     ],
     statusFormat: [
       {
         key: 1,
-        lvalue: "<i class='yfont_orange'>Processing</i>",
+        lvalue: "<i className='yfont_orange'>Processing</i>",
         value: 'Processing'
       },
       {
         key: 2,
-        lvalue: "<i class='yfont_green'>Approved</i>",
+        lvalue: "<i className='yfont_green'>Approved</i>",
         value: 'Approved'
       },
       {
         key: 3,
-        lvalue: "<i class='yfont_red'>Rejected</i>",
+        lvalue: "<i className='yfont_red'>Rejected</i>",
         value: 'Rejected'
       },
       {
@@ -93,7 +93,7 @@ const ListPage = {
       },
       {
         key: 6,
-        lvalue: "<i class='yfont_red'>Withdrawn</i>",
+        lvalue: "<i className='yfont_red'>Withdrawn</i>",
         value: 'Withdrawn'
       }
     ],

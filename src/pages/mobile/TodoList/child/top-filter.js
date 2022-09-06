@@ -50,7 +50,7 @@ const TopFilter = (props) => {
         style={{ marginLeft: "0.4rem" }}
       />
       <div
-        class="filter-icon-btn"
+        className="filter-icon-btn"
         onClick={()=>props.setFilterVisible(true)}
       ></div>
       <Mask

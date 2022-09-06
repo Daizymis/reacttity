@@ -1,10 +1,15 @@
-import { Popup, SearchBar } from "antd-mobile";
+import { Popup, SearchBar, Input } from "antd-mobile";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "@/assets/css/listFilter.scss";
 const ListFilter = (props) => {
   console.log(props);
-  const { filterVisible, setFilterVisible, listKeys,  filterParams:checkedValue } = props;
+  const {
+    filterVisible,
+    setFilterVisible,
+    listKeys,
+    filterParams: checkedValue,
+  } = props;
   const { t } = useTranslation();
   const [timeSelected, setTimeSelected] = useState();
   const flowTypeSelect = useCallback(() => {
@@ -78,7 +83,6 @@ const ListFilter = (props) => {
       bodyStyle={{
         borderTopLeftRadius: "8px",
         borderTopRightRadius: "8px",
-        
       }}
     >
       <div className="list-filter">
@@ -92,7 +96,7 @@ const ListFilter = (props) => {
                     key={vIndex}
                     className={`${
                       vItem.value === checkedValue[listKeys.flowType.key]
-                        ? 'active'
+                        ? "active"
                         : ""
                     }`}
                     onClick={() => selectValue(vItem, listKeys.flowType.key)}
@@ -109,10 +113,15 @@ const ListFilter = (props) => {
                 <div>
                   <p className="title">{item.label}</p>
                   <div v-if="item.type === 'input'" className="search-dev">
-                    <SearchBar
-                      value={checkedValue[item.key]}
+                    <Input
                       placeholder="请输入内容"
-                      onSearch={()=>returnFilterData()}
+                      value={checkedValue[item.key]}
+                      onChange={(val) => {
+                        props.returnFilterData({
+                          key: item.key,
+                          value: val,
+                        });
+                      }}
                     />
                   </div>
                 </div>

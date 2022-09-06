@@ -46,54 +46,54 @@ const ListPage = {
     myHandlingFormat: [
       {
         key: 4,
-        lvalue: "<i class='yfont_blue'>需关注</i>",
+        lvalue: "<i className='yfont_blue'>需关注</i>",
         value: '需关注'
       },
       {
         key: 0,
-        lvalue: "<i class='yfont_red'>未处理</i>",
+        lvalue: "<i className='yfont_red'>未处理</i>",
         value: '未处理'
       },
       {
         key: 1,
-        lvalue: "<i class='yfont_green'>已处理</i>",
+        lvalue: "<i className='yfont_green'>已处理</i>",
         value: '已处理'
       },
       {
         key: 2,
-        lvalue: "<i class='yfont_blue'>我发起的</i>",
+        lvalue: "<i className='yfont_blue'>我发起的</i>",
         value: '我发起的'
       },
       {
         key: 3,
-        lvalue: "<i class='yfont_red'>发起人已撤回</i>",
+        lvalue: "<i className='yfont_red'>发起人已撤回</i>",
         value: '发起人已撤回'
       }
     ],
     statusFormat: [
       {
         key: 1,
-        lvalue: "<i class='yfont_orange'>处理中</i>",
+        lvalue: "<i className='yfont_orange'>处理中</i>",
         value: '处理中'
       },
       {
         key: 2,
-        lvalue: "<i class='yfont_green'>已通过</i>",
+        lvalue: "<i className='yfont_green'>已通过</i>",
         value: '已通过'
       },
       {
         key: 3,
-        lvalue: "<i class='yfont_red'>已驳回</i>",
+        lvalue: "<i className='yfont_red'>已驳回</i>",
         value: '已驳回'
       },
       {
         key: 0,
-        lvalue: "<i class='yfont_orange'>已提交</i>",
+        lvalue: "<i className='yfont_orange'>已提交</i>",
         value: '已提交'
       },
       {
         key: 6,
-        lvalue: "<i class='yfont_red'>已撤回</i>",
+        lvalue: "<i className='yfont_red'>已撤回</i>",
         value: '已撤回'
       }
     ],
