@@ -44,6 +44,7 @@ const TopFilter = (props) => {
       <Input
         placeholder="请输入内容"
         value={value}
+        onFocus={()=> setShowSheet(false)}
         onEnterPress={(val) => {
           props.search(val);
         }}
@@ -51,7 +52,7 @@ const TopFilter = (props) => {
       />
       <div
         className="filter-icon-btn"
-        onClick={()=>props.setFilterVisible(true)}
+        onClick={()=>(props.setFilterVisible(true), setShowSheet(false))}
       ></div>
       <Mask
         visible={showSheet}

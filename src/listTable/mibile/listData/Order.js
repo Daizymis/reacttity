@@ -1,4 +1,4 @@
-import { flowTypeFormat, myHandlingFormat, SortWay } from './enum';
+import { flowTypeFormat, myHandlingFormat, SortWay, timeFormat } from './enum';
 const Order = {
   type: 57,
   typeDesc: '下单',
@@ -26,11 +26,19 @@ const Order = {
       type: 'select',
       search: true,
       selectData: {
-        url: 'getDictionary/OrderStatus',
+        url: '/api/getDictionary/OrderStatus',
         key: 'key',
         label: 'value',
         value: 'key'
       }
+    },
+    {
+      label: '投放周期',
+      key: 'updatetime',
+      type: 'date',
+      search: true,
+      format: timeFormat,
+      showFormat: 'yyyy-MM-dd',
     },
     {
       label: '下单编号',
@@ -41,6 +49,18 @@ const Order = {
     {
       label: '供应商',
       key: 'supplier',
+      type: 'input',
+      search: true
+    },
+    {
+      label: '媒体简称',
+      key: 'media',
+      type: 'input',
+      search: true
+    },
+    {
+      label: '付款主体',
+      key: 'payfirm',
       type: 'input',
       search: true
     }

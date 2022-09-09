@@ -37,5 +37,25 @@ export const dealKeyReturnValue1 = (key, list, checkKey) => {
   }
   return {};
 };
+
+//过滤无效值
+export const dealObjValue = obj => {
+  if (Object.prototype.toString.call(obj) === '[object Object]') {
+    for (const propName in obj) {
+      if (
+        obj[propName] === null ||
+        obj[propName] === undefined ||
+        obj[propName] === '' ||
+        JSON.stringify(obj[propName]) === '{}'
+      ) {
+        delete obj[propName];
+      }
+    }
+    return obj;
+  } else {
+    return {};
+  }
+};
+
 export default utils;
 export { http, Cookie };

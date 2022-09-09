@@ -16,17 +16,21 @@ function Menu(props) {
     });
   };
   const toList = (menu) => {
-    navigate(`/${menu.route.replace('OListTable', 'todolist')}`);
+    navigate(`/${menu.route.replace("OListTable", "todolist")}`);
   };
   return (
-    <div style={{paddingBottom: '1.2rem'}}>
+    <div style={{ paddingBottom: "1.2rem" }}>
       <div className="flex-wrap">
         {menus.map((item) => (
-          <div key={item.menuTypeName}>
+          <div key={item.menuTypeName} style={{ width: "100%" }}>
             <p className="menu-title">{item.menuTypeName}</p>
             <div className="flex-wrap">
               {item.menuList?.map((menu) => (
-                <div className="menu-nav" key={menu.id} onClick={()=>toList(menu)}>
+                <div
+                  className="menu-nav"
+                  key={menu.id}
+                  onClick={() => toList(menu)}
+                >
                   <img
                     src={require(`../../../assets/img/mobile/module1.png`)}
                     className="img-nav"

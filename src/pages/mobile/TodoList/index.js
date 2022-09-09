@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../../../components/NavBar";
 import { useParams } from "react-router";
-import { InfiniteScroll, List } from "antd-mobile";
+import { InfiniteScroll, Divider } from "antd-mobile";
 import { http } from "@/utils/index";
 import listTableInfo from "../../../listTable/mibile/listData";
 import "@/assets/css/todoList.scss";
@@ -14,16 +14,29 @@ import { useMemo } from "react";
 import ListFilter from "./child/list-filter";
 import Loading from "../Loading";
 import useAsyncCallback from "../../../hook/useAsynState";
+import { dealObjValue } from "../../../utils";
 function TodoList(props) {
   let { type } = useParams();
   type = "ProjectApproval";
-  const [listData, setListData] = useState([]);
-  let [hasMore, setHasMore] = useState(true);
+  const [data, setData] = useState({
+    listData: [],
+    hasMore: false,
+    total: 0,
+    filterParams: {
+      searchInfo: {},
+    },
+    listdataurl: {},
+    listParams: {
+      ordername: "",
+      orderby: "",
+      pageindex: 1,
+      pagesize: 20,
+    },
+  });
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const [total, setTotal] = useState(0);
-  let [listKeys, setListKeys] = useState(() => {
-    return listTableInfo["Order"];
-  });
+  let [listKeys, setListKeys] = useState(() => listTableInfo["Order"]);
   let [filterParams, setFilterParams] = useState({
     searchInfo: {},
   });
@@ -35,12 +48,13 @@ function TodoList(props) {
     pageindex: 1,
     pagesize: 20,
   });
-  useEffect(()=>{
+  useEffect(() => {
     initSelectedData();
     loadMore();
-  }, [])
+    dealFormatList();
+  }, []);
   let [filterVisible, setFilterVisible] = useState(false);
-  
+
   const initSelectedData = (params) => {
     const val = params ? params : listKeys;
     // 筛选重置
@@ -57,16 +71,34 @@ function TodoList(props) {
         initFilterParam[item.key] = "";
       }
     });
-    setFilterParams((prevState) => {
-      return { ...prevState, searchInfo: Object.assign({}, val.searchInfo), ...initFilterParam, };
-    });
-    setListParams((prevState) => {
-      return {
-        ...prevState,
-        ordername: val.orderName,
-        orderby: val.orderBy,
-      };
-    });
+    setFilterParams((prevState) => ({
+      ...prevState,
+      searchInfo: Object.assign({}, val.searchInfo),
+      ...initFilterParam,
+    }));
+    setListParams((prevState) => ({
+      ...prevState,
+      ordername: val.orderName,
+      orderby: val.orderBy,
+    }));
+  };
+  const dealFormatList = async() =>{
+    let listItem = listKeys.listItem;
+    for (let i =0; i< listItem.length; i++) {
+      let item = listItem[i];
+      if (item.selectData) {
+        let res = await http.post(item.selectData.url);
+           item.format = [
+             {
+               value: '',
+               label: t('listPage.allOption')
+             }
+           ];
+           let formatList = res.data.map(fItem =>( {value: fItem[item.selectData.value], label: fItem[item.selectData.label]}))
+           item.format = item.format.concat(formatList);
+         }
+    }
+     setListKeys(prevState => ({...prevState, listItem}));
   };
   const reset = () => {
     initSelectedData();
@@ -75,54 +107,61 @@ function TodoList(props) {
    * 列表展示
    */
   const getTodoList = async () => {
+    setLoading(true);
     let obj = {
       ...listParams,
+      conditions: {
+        ...dealObjValue(JSON.parse(JSON.stringify(filterParams))),
+      },
     };
 
     let url = listKeys.type
       ? `/api/${listdataurl}/${listKeys.type}`
       : `${listKeys.listdataurl}`;
     const res = await http.post(url, obj);
-    console.log(res);
+    setLoading(false);
     setTotal(res.data.total);
     if (listParams.pageindex === 1) {
-      setListData(res?.data?.dataList);
-      setHasMore(res?.data?.dataList?.length < res.data.total);
+      setData((prevState) => ({
+        ...prevState,
+        listData: res?.data?.dataList,
+        hasMore: res?.data?.dataList?.length < res.data.total,
+      }));
     } else {
-      setListData((prevState) => [...prevState, ...res?.data?.dataList]);
-      setHasMore(res?.data?.dataList?.length + 20 < res.data.total);
+      setData((prevState) => ({
+        ...prevState,
+        listData: [...prevState.listData, ...res?.data?.dataList],
+        hasMore: res?.data?.dataList?.length + 20 < res.data.total,
+      }));
     }
-    setListParams((prevState) => {
-      return { ...prevState, pageindex: listParams.pageindex + 1 };
-    });
+    setListParams((prevState) => ({
+      ...prevState,
+      pageindex: listParams.pageindex + 1,
+    }));
   };
   async function loadMore() {
-    // setHasMore(false);
-    if ((listData.length < total || listParams.pageindex === 1) && listKeys) {
+    if (
+      (data.listData.length < total || listParams.pageindex === 1) &&
+      listKeys
+    ) {
       await getTodoList();
     }
   }
-  const func = useAsyncCallback(()=>{
+  const func = useAsyncCallback(() => {
     loadMore();
-  })
+  });
   const changeListType = (item) => {
-    console.log(item);
     setListdataurl(item.listdataurl);
-    setListParams((prevState) => {
-      return { ...prevState, pageindex: 1 };
-    });
-    setListData([]);
-    setHasMore(true);
-    func();
+    reFilterTable();
   };
   const returnFilterData = (item) => {
-    console.log(item);
-    setFilterParams(prevState=>{return {...prevState, [item.key]: item.value}});
+    setFilterParams((prevState) => ({ ...prevState, [item.key]: item.value }));
   };
-  const resetTable = () =>{
-    setListData([]);
-    setListParams(prevState => {return {...prevState,pageindex :1}} )
-  }
+  const reFilterTable = () => {
+    setListParams((prevState) => ({ ...prevState, pageindex: 1 }));
+    setData((prevState) => ({ ...prevState, listData: [], hasMore: true }));
+    func();
+  };
   return (
     <div>
       {useMemo(() => {
@@ -136,7 +175,7 @@ function TodoList(props) {
       }, [listKeys])}
 
       <div className="list">
-        {listData?.map((item, index) => (
+        {data.listData?.map((item, index) => (
           <div className="list-item" key={index}>
             <div className="list-item-top">
               {listKeys.flowType && (
@@ -172,7 +211,11 @@ function TodoList(props) {
           </div>
         ))}
       </div>
-      {listData?.length > 0 ? <InfiniteScroll loadMore={loadMore} hasMore={hasMore} /> : <Loading></Loading>}
+      {data.listData?.length > 0 ? (
+        <InfiniteScroll loadMore={loadMore} hasMore={data.hasMore} />
+      ) : loading ? (
+        <Loading></Loading>
+      ) : <Divider>暂无数据</Divider>}
 
       {filterVisible && (
         <ListFilter
@@ -181,7 +224,8 @@ function TodoList(props) {
           filterVisible={filterVisible}
           returnFilterData={returnFilterData}
           filterParams={filterParams}
-          reset ={reset}
+          reset={reset}
+          reFilterTable={reFilterTable}
         ></ListFilter>
       )}
     </div>

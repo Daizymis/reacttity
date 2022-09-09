@@ -11,7 +11,7 @@ const ListFilter = (props) => {
     filterParams: checkedValue,
   } = props;
   const { t } = useTranslation();
-  const [timeSelected, setTimeSelected] = useState();
+  const [timeSelected, setTimeSelected] = useState({});
   const flowTypeSelect = useCallback(() => {
     if (listKeys?.flowType) {
       return [
@@ -69,6 +69,15 @@ const ListFilter = (props) => {
       return "";
     }
   };
+  const returnPickerVal = (item)=> {
+    const obj = item.format.find(res => {
+      return res.value === checkedValue[item.key];
+    });
+    if (obj) {
+      return obj.label;
+    }
+    return '';
+  };
   const openPick = () => {};
   return (
     <Popup
@@ -109,63 +118,82 @@ const ListFilter = (props) => {
           )}
           {listKeys?.listItem?.map((item, index) => (
             <div key={index} className="filter-item">
-              {item.search ? (
+              {item.search && (
                 <div>
                   <p className="title">{item.label}</p>
-                  <div v-if="item.type === 'input'" className="search-dev">
-                    <Input
-                      placeholder="请输入内容"
-                      value={checkedValue[item.key]}
-                      onChange={(val) => {
-                        props.returnFilterData({
-                          key: item.key,
-                          value: val,
-                        });
-                      }}
-                    />
-                  </div>
-                </div>
-              ) : item.type === "pick" ? (
-                <div className="search-dev">
-                  <SearchBar
-                    value={returnPickerVal(item)}
-                    placeholder="请输入内容"
-                    onClick={openPick(item)}
-                  />
-                </div>
-              ) : (
-                <div className="item-list">
-                  {item.format?.map((vItem, vIndex) => (
-                    <div
-                      key={vIndex}
-                      className={{
-                        active:
-                          checkedValue[item.key] === vItem.value ||
-                          (item.type === "date" &&
-                            timeSelected[item.key] === vItem.label),
-                      }}
-                      onClick={() => selectValue(vItem, item.key, item.type)}
-                    >
-                      {vItem.label}
-                    </div>
-                  ))}
+                  {(() => {
+                    switch (item.type) {
+                      case "input":
+                        return (
+                          <div className="search-dev">
+                            <Input
+                              placeholder="请输入内容"
+                              value={checkedValue[item.key]}
+                              onChange={(val) => {
+                                props.returnFilterData({
+                                  key: item.key,
+                                  value: val,
+                                });
+                              }}
+                            />
+                          </div>
+                        );
+                        break;
+                      case "pick":
+                        return (
+                          <div className="search-dev">
+                            <SearchBar
+                              value={returnPickerVal(item)}
+                              placeholder="请输入内容"
+                              onClick={openPick(item)}
+                            />
+                          </div>
+                        );
+                        break;
+                      default:
+                        return (
+                          <div className="item-list">
+                            {item.format?.map((vItem, vIndex) => (
+                              <div
+                                key={vIndex}
+                                className={`${
+                                  checkedValue[item.key] === vItem.value ||
+                                  (item.type === "date" &&
+                                    timeSelected[item.key] === vItem.label)
+                                    ? "active"
+                                    : ""
+                                }`}
+                                onClick={() =>
+                                  selectValue(vItem, item.key, item.type)
+                                }
+                              >
+                                {vItem.label}
+                              </div>
+                            ))}
 
-                  {timeSelected[item.key] === "自定义" &&
-                    checkedValue[item.key] && (
-                      <p className="customTime">
-                        {checkedValue[item.key][0] +
-                          " ~ " +
-                          checkedValue[item.key][1]}
-                      </p>
-                    )}
+                            {timeSelected[item.key] === "自定义" &&
+                              checkedValue[item.key] && (
+                                <p className="customTime">
+                                  {checkedValue[item.key][0] +
+                                    " ~ " +
+                                    checkedValue[item.key][1]}
+                                </p>
+                              )}
+                          </div>
+                        );
+                    }
+                  })()}
                 </div>
               )}
             </div>
           ))}
         </div>
+
         <div className="filter-btn">
           <div onClick={() => props.reset()}>重置</div>
-          <div onClick={() => props.getData()}>确定</div>
+          <div onClick={() => (props.reFilterTable(), setFilterVisible(false))}>
+            确定
+          </div>
         </div>
       </div>
     </Popup>

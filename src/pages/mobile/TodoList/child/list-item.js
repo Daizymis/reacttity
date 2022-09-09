@@ -1,4 +1,5 @@
-import {dealKeyReturnValue, dealKeyReturnValue1} from '@/utils/index'
+import { dealKeyReturnValue, dealKeyReturnValue1 } from "@/utils/index";
+import moment from "moment";
 /**
  * 针对select的值的匹配显示
  * @param keyName
@@ -25,6 +26,10 @@ function showValue(keyName, key, list, checkKey) {
   }
   return "-";
 }
+const showTime = (item, showFormat) => {
+  const time = new Date(item);
+  return item ? moment(time)?.format(showFormat || "yyyy-MM-DD hh:mm:ss") : "-";
+};
 const ListItem = (props) => {
   const { listKeys, item } = props;
 
