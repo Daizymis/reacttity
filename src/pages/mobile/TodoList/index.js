@@ -217,7 +217,7 @@ function TodoList(props) {
         <Loading></Loading>
       ) : <Divider>暂无数据</Divider>}
 
-      {filterVisible && (
+      { (
         <ListFilter
           listKeys={listKeys}
           setFilterVisible={setFilterVisible}
