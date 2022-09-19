@@ -12,9 +12,8 @@ const Index = () => {
   const { userInfo, locale } = useStore().getState();
   const { i18n } = useTranslation();
   const navigate = useNavigate();
-  console.log(pathname.indexOf("todolist"));
   useEffect(() => {
-    if (userInfo?.username) {
+    if (userInfo?.name) {
       if (pathname === "/login") {
         navigate("/menu");
       }

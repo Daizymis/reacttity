@@ -8,7 +8,7 @@ const Menu = React.lazy(() => import("@/pages/mobile/Menu"));
 const Login = React.lazy(() => import("@/pages/mobile/Login"));
 const Layout = React.lazy(() => import("@/pages/mobile/Layout"));
 const TodoList = React.lazy(() => import("../../pages/mobile/TodoList"));
-const My = React.lazy(()=> import('@/pages/mobile/My'))
+const My = React.lazy(() => import("@/pages/mobile/My"));
 const routerConfig = [
   {
     path: "/",
@@ -45,20 +45,20 @@ const routerConfig = [
         path: "my",
         element: (
           <Suspense fallback={<Loading />}>
-            <My state={{my: true}}/>
+            <My state={{ my: true }} />
           </Suspense>
         ),
       },
+      {
+        path: "todoList/:type",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <TodoList />
+          </Suspense>
+        ),
+        meta: {},
+      },
     ],
-  },
-  {
-    path: "todoList/:type",
-    element: (
-      <Suspense fallback={<Loading />}>
-        <TodoList />
-      </Suspense>
-    ),
-    meta: {},
   },
   {
     path: "*",

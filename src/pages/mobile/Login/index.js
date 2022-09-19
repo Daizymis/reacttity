@@ -14,7 +14,7 @@ function Login(props) {
         localStorage.setItem("setToken", res.token || "");
         if (Number(res.code) === LOGIN_OK) {
           message.success("登录成功");
-          props.login(values);
+          props.login(res.userInfo);
           localStorage.setItem('setToken', res.token);
           // Cookies.setCookie("login", "LOGIN_OK");
           // if (values.remember) {
@@ -26,7 +26,7 @@ function Login(props) {
           // const shortId = Cookies.getCookie("shortId");
           // const shortUrl = Cookies.getCookie("shortUrl");
           if (res.shortUrl != null) {
-            navigate("/e/" + shortId + "/" + shortUrl);
+            navigate("/e/" + shortId + "/" + shortUrl); 
           } else {
             navigate("/menu");
           }

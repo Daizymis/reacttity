@@ -12,7 +12,8 @@ export default [
       if (request.username === "guest" && request.password === "guest") {
         return {
           code: 201,
-          data: { token: "youaretheappleinmyeyes" },
+          data: { token: "youaretheappleinmyeyes", userInfo:
+          "{\"id\":1,\"caid\":1,\"empid\":\"1\",\"deptid\":\"1\",\"name\":\"guest\",\"leadercaid\":544,\"leadername\":\"mary\"}" },
         };
       }
       return {

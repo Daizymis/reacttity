@@ -38,7 +38,7 @@ const Order = {
       type: 'date',
       search: true,
       format: timeFormat,
-      showFormat: 'yyyy-MM-dd',
+      showFormat: 'yyyy-MM-DD',
     },
     {
       label: '下单编号',

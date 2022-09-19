@@ -14,6 +14,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 function My(props) {
   const { userInfo } = useStore().getState();
+  console.log(userInfo);
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
@@ -50,9 +51,6 @@ function My(props) {
       <div id="exit" className="exit-btn" onClick={() => setVisible(true)}>
         {t("logOut")}
       </div>
-      {/* {
-        document.getElementById("exit") ? 
-        (createPortal( */}
       <Popup
         visible={visible}
         onMaskClick={() => {
@@ -77,9 +75,6 @@ function My(props) {
           </div>
         </div>
       </Popup>
-      {/* ),
-        document.getElementById("exit")) :<></>
-      } */}
     </>
   );
 }

@@ -5,15 +5,15 @@ import myDefault from "@/assets/img/mobile/my.png";
 import myActive from "@/assets/img/mobile/my-click.png";
 import axios from "axios";
 import { Outlet } from "react-router-dom";
-import {useLocation, useNavigate} from 'react-router'
+import { useLocation, useNavigate } from "react-router";
 import "@/assets/css/layout.scss";
 import { useTranslation } from "react-i18next";
 
 function Layout(props) {
   const [footMenu, setFootMenu] = useState([]);
-  const {t} = useTranslation();
-  
-  const param = useLocation();
+  const { t } = useTranslation();
+
+  const param = useLocation().pathname;
   console.log(param);
   useEffect(() => {
     getMenu();
@@ -27,34 +27,39 @@ function Layout(props) {
     //     "X-Host": "mall.film-ticket.cinema.list",
     //   },
     // }).then((res) => {
-      setFootMenu([
-        {
-          img: workspaceDefault,
-          imgActive: workspaceActive,
-          name: "workbench",
-          url: "/menu",
-        },
-        {
-          img: myDefault,
-          imgActive: myActive,
-          name: "my",
-          url: "/my",
-        },
-      ]);
+    setFootMenu([
+      {
+        img: workspaceDefault,
+        imgActive: workspaceActive,
+        name: "workbench",
+        url: "/menu",
+      },
+      {
+        img: myDefault,
+        imgActive: myActive,
+        name: "my",
+        url: "/my",
+      },
+    ]);
     // });
   };
   const location = useNavigate();
-  const to = (url) =>{
+  const to = (url) => {
     location(url);
-  }
+  };
   return (
     <div>
       <Outlet />
       <div className="footer">
         {footMenu.map((item) => (
-          <div className="item" key={item.name} onClick={()=>to(item.url)}>
-            <img src={item.img} className="img-nav" />
-            <div style={{color: '#3d87fc'}}>{t(item.name)}</div>
+          <div className="item" key={item.name} onClick={() => to(item.url)}>
+            <img
+              src={~param.indexOf(item.url) ? item.imgActive: item.img}
+              className="img-nav"
+            />
+            <div style={{ color: ~param.indexOf(item.url) ?  "#3d87fc"  : ""}}>
+              {t(item.name)}
+            </div>
           </div>
         ))}
       </div>

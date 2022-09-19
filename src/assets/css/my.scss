@@ -6,8 +6,8 @@
   margin-bottom: 0.16rem;
 }
 .my-img {
-  width: 1.26rem;
-  height: 1.26rem;
+  // width: 1.26rem;
+  // height: 1.26rem;
   border-radius: 0.2rem;
   margin-left: 0.37rem;
   margin-right: 0.39rem;
@@ -17,6 +17,7 @@
   font-weight: 600;
   color: #333333;
   line-height: 0.63rem;
+  word-break: break-all;
 }
 .dept-nav {
   font-weight: 400;

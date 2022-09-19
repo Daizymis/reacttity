@@ -225,7 +225,7 @@ const ListFilter = (props) => {
           setCustmizeData(prevState=> ({...prevState, showTimer: false}))
         }}
         position="bottom"
-        bodyStyle={{ height: "60vh" }}
+        bodyStyle={{ height: "77vh" }}
       >
         <Calendar
           defaultValue={custmizeData.custTime}
