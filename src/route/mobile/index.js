@@ -9,6 +9,7 @@ const Login = React.lazy(() => import("@/pages/mobile/Login"));
 const Layout = React.lazy(() => import("@/pages/mobile/Layout"));
 const TodoList = React.lazy(() => import("../../pages/mobile/TodoList"));
 const My = React.lazy(() => import("@/pages/mobile/My"));
+const Sign = React.lazy(() => import("@/pages/mobile/Sign"));
 const routerConfig = [
   {
     path: "/",
@@ -59,6 +60,14 @@ const routerConfig = [
         meta: {},
       },
     ],
+  },
+  {
+    path: 'sign',
+    element: (
+      <Suspense fallback={<Loading />}>
+        <Sign />
+      </Suspense>
+    )
   },
   {
     path: "*",
