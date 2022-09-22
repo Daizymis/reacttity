@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../../../components/NavBar";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { InfiniteScroll, Divider } from "antd-mobile";
 import { http } from "@/utils/index";
-import listTableInfo from "../../../listTable/mibile/listData";
+import listTableInfo from "../../../listTable/mobile/listData";
 import "@/assets/css/todoList.scss";
 import { useTranslation } from "react-i18next";
 import { dealKeyReturnValue, dealKeyReturnValue1 } from "@/utils/index";
-import { throttle } from "../../../utils/util";
+import { connect } from "react-redux";
 import TopFilter from "./child/top-filter";
 import ListItem from "./child/list-item";
 import { useMemo } from "react";
@@ -15,7 +14,10 @@ import ListFilter from "./child/list-filter";
 import Loading from "../Loading";
 import useAsyncCallback from "../../../hook/useAsynState";
 import { dealObjValue } from "../../../utils";
+import { SET_DATAADAPT, SET_LISTDATAADAPT } from "../../../store/actionType";
+import listConfig from "../../../listTable/mobile/listConfig";
 function TodoList(props) {
+  let {listDataAdapt, setListDataAdapt, dataAdapt, setDataAdapt} = props;
   let { type } = useParams();
   type = "ProjectApproval";
   const [data, setData] = useState({
@@ -37,6 +39,8 @@ function TodoList(props) {
   const { t } = useTranslation();
   const [total, setTotal] = useState(0);
   let [listKeys, setListKeys] = useState(() => listTableInfo["Order"]);
+  const listTypes = useMemo(()=> listConfig["Order"]);
+  console.log(listTypes);
   let [filterParams, setFilterParams] = useState({
     searchInfo: {},
   });
@@ -82,23 +86,26 @@ function TodoList(props) {
       orderby: val.orderBy,
     }));
   };
-  const dealFormatList = async() =>{
+  const dealFormatList = async () => {
     let listItem = listKeys.listItem;
-    for (let i =0; i< listItem.length; i++) {
+    for (let i = 0; i < listItem.length; i++) {
       let item = listItem[i];
       if (item.selectData) {
         let res = await http.post(item.selectData.url);
-           item.format = [
-             {
-               value: '',
-               label: t('listPage.allOption')
-             }
-           ];
-           let formatList = res.data.map(fItem =>( {value: fItem[item.selectData.value], label: fItem[item.selectData.label]}))
-           item.format = item.format.concat(formatList);
-         }
+        item.format = [
+          {
+            value: "",
+            label: t("listPage.allOption"),
+          },
+        ];
+        let formatList = res.data.map((fItem) => ({
+          value: fItem[item.selectData.value],
+          label: fItem[item.selectData.label],
+        }));
+        item.format = item.format.concat(formatList);
+      }
     }
-     setListKeys(prevState => ({...prevState, listItem}));
+    setListKeys((prevState) => ({ ...prevState, listItem }));
   };
   const reset = () => {
     initSelectedData();
@@ -151,6 +158,11 @@ function TodoList(props) {
     loadMore();
   });
   const changeListType = (item) => {
+    console.log(listTypes.listdata);
+    const type = listTypes.listdata.filter(config => {
+      return item.value === config.value;
+    });
+    setListDataAdapt(type[0])
     setListdataurl(item.listdataurl);
     reFilterTable();
   };
@@ -161,6 +173,20 @@ function TodoList(props) {
     setListParams((prevState) => ({ ...prevState, pageindex: 1 }));
     setData((prevState) => ({ ...prevState, listData: [], hasMore: true }));
     func();
+  };
+  const navigate = useNavigate();
+  const goToDetails = (item) => {
+    let _postData = {};
+    listDataAdapt?.postData?.keys?.forEach((val) => {
+      _postData[val] = item[val];
+    });
+    const timestamp = new Date().getTime();
+    setDataAdapt({
+      url: listDataAdapt.url,
+      postData: _postData,
+      timestamp: timestamp
+    });
+    navigate(`/${item.SystemCoreRoute}`, { timestamp: timestamp });
   };
   return (
     <div>
@@ -176,7 +202,11 @@ function TodoList(props) {
 
       <div className="list">
         {data.listData?.map((item, index) => (
-          <div className="list-item" key={index}>
+          <div
+            className="list-item"
+            key={index}
+            onClick={() => goToDetails(item)}
+          >
             <div className="list-item-top">
               {listKeys.flowType && (
                 <div className="status">{t("listPage.status")}</div>
@@ -215,9 +245,11 @@ function TodoList(props) {
         <InfiniteScroll loadMore={loadMore} hasMore={data.hasMore} />
       ) : loading ? (
         <Loading></Loading>
-      ) : <Divider>暂无数据</Divider>}
+      ) : (
+        <Divider>暂无数据</Divider>
+      )}
 
-      { (
+      {
         <ListFilter
           listKeys={listKeys}
           setFilterVisible={setFilterVisible}
@@ -227,8 +259,26 @@ function TodoList(props) {
           reset={reset}
           reFilterTable={reFilterTable}
         ></ListFilter>
-      )}
+      }
     </div>
   );
 }
-export default TodoList;
+const mapDispatchToProps = (dispatch) => {
+  return{ setListDataAdapt(data) {
+    dispatch({
+      type: SET_LISTDATAADAPT,
+      data
+    })
+  },
+  setDataAdapt(data) {
+    dispatch({
+      type: SET_DATAADAPT,
+      data
+    })
+  }
+}
+}
+const mapStateToProps = (state) =>{
+  return {listDataAdapt: state.listDataAdapt, dataAdapt: state.dataAdapt}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

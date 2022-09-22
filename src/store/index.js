@@ -8,7 +8,7 @@ import persistStore from "redux-persist/es/persistStore";
 const persistConfig = {
   key: "reactivity",
   storage,
-  whitelist: ["userInfo", "locale"],
+  whitelist: ["userInfo", "locale", "listDataAdapt", "dataAdapt"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -2,7 +2,11 @@ import React, { Component, useEffect, useState } from "react";
 import { http } from "../../../utils";
 import "@/assets/css/menu.scss";
 import { useLocation, useNavigate } from "react-router";
+import { SET_LISTDATAADAPT } from "../../../store/actionType";
+import { connect } from "react-redux";
+import { dataAdaptUrl } from "../../../utils/config";
 function Menu(props) {
+  const { setListDataAdapt } = props;
   const [menus, setMenu] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -15,7 +19,15 @@ function Menu(props) {
       }
     });
   };
-  const toList = (menu) => {
+  const toListPage = (menu) => {
+    const _obj =
+      menu.impurl == null
+        ? null
+        : {
+            url: dataAdaptUrl,
+            postData: JSON.parse(menu.impurl),
+          };
+    setListDataAdapt(_obj);
     navigate(`/${menu.route.replace("OListTable", "todolist")}`);
   };
   return (
@@ -29,7 +41,7 @@ function Menu(props) {
                 <div
                   className="menu-nav"
                   key={menu.id}
-                  onClick={() => toList(menu)}
+                  onClick={() => toListPage(menu)}
                 >
                   <img
                     src={require(`../../../assets/img/mobile/module1.png`)}
@@ -45,4 +57,17 @@ function Menu(props) {
     </div>
   );
 }
-export default Menu;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setListDataAdapt(data) {
+      dispatch({
+        type: SET_LISTDATAADAPT,
+        data,
+      });
+    },
+  };
+};
+const mapStateToProps = (state) => {
+  return { listDataAdapt: state.listDataAdapt };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

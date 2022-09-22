@@ -10,6 +10,8 @@ const Layout = React.lazy(() => import("@/pages/mobile/Layout"));
 const TodoList = React.lazy(() => import("../../pages/mobile/TodoList"));
 const My = React.lazy(() => import("@/pages/mobile/My"));
 const Sign = React.lazy(() => import("@/pages/mobile/Sign"));
+const OrderDetail = React.lazy(() => import("@/pages/mobile/Order/index"));
+
 const routerConfig = [
   {
     path: "/",
@@ -60,6 +62,14 @@ const routerConfig = [
         meta: {},
       },
     ],
+  },
+  {
+    path: 'OrderDetails',
+    element: (
+      <Suspense fallback={<Loading />}>
+        <OrderDetail></OrderDetail>
+      </Suspense>
+    )
   },
   {
     path: 'sign',
