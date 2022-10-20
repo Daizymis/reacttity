@@ -14,7 +14,7 @@
 
 // 流程进度 + 客户侧基础信息 +
 // 特批情况说明 + 撤单原因 + 流程观察者 + 临时流程参与者 + 流程共享人 + 附件 + 发表评论 + 修改记录 + 历史记录 + 驳回原因
-import { publicMenu } from 'pages/mobile/order/sideMenu/publicMenu';
+import { publicMenu } from '../publicMenu';
 
 const backRebate = {
   '3': {

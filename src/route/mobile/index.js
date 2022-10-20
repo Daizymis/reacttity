@@ -11,10 +11,10 @@ const TodoList = React.lazy(() => import("../../pages/mobile/TodoList"));
 const My = React.lazy(() => import("@/pages/mobile/My"));
 const Sign = React.lazy(() => import("@/pages/mobile/Sign"));
 const OrderDetail = React.lazy(() => import("@/pages/mobile/Order/index"));
-
+const OuterStatementDetail = React.lazy(() =>import("@/pages/mobile/OuterStatement/index"));
 const routerConfig = [
   {
-    path: "/",
+    path: "/", 
     element: <Navigate to="/login" />,
   },
   {
@@ -68,6 +68,14 @@ const routerConfig = [
     element: (
       <Suspense fallback={<Loading />}>
         <OrderDetail></OrderDetail>
+      </Suspense>
+    )
+  },
+  {
+    path: 'OuterStatementDetails',
+    element: (
+      <Suspense fallback={<Loading />}>
+        <OuterStatementDetail></OuterStatementDetail>
       </Suspense>
     )
   },

@@ -1,5 +1,7 @@
-import Order from "./Order"
+import Order from "./Order";
+import OuterStatement from "./OuterStatement";
 const listTableInfo = {
-    Order
-}
+  Order,
+  OuterStatement,
+};
 export default listTableInfo;

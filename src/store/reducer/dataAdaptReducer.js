@@ -1,11 +1,18 @@
 import { SET_DATAADAPT } from "../actionType";
 import { defaultState } from "../state";
-export function listDataAdaptReducer(state = defaultState.userInfo, action) {
+export function dataAdaptReducer(state = defaultState.dataAdapt, action) {
   let newState = { ...state };
   switch (action.type) {
     case SET_DATAADAPT:
-      newState.dataAdapt = action.data;
-      return action.data;
+      if (Object.keys(action.data).length === 0) {
+        newState.dataAdapt = action.data;
+      } else {
+        newState = {
+          ...newState,
+          [action.data.timestamp]: action.data,
+        };
+      }
+      return newState;
     default:
       return state || {};
   }

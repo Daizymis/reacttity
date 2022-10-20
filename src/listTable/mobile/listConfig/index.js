@@ -39,5 +39,31 @@ export default {
         },
       ],
     },
+    OuterStatement: {
+      name: "外部结算单",
+      permissions: {hasCreatNew: "Create:OuterStatement"},
+      listdata: [
+        {
+          url: "dataAdapt",
+          postData: {
+            title: "外部结算单审批",
+            type: "OuterStatement",
+            flowType: 75,
+            permissions: {
+              hasCreatNew: "Create:OuterStatement",
+              canBatchExport: "Create:OuterStatement"
+            },
+            url: "getWorkFlowDetail",
+            createRoute: "OuterStatement",
+            listdataurl: "getTodoList",
+            isShow: true,
+            route: 'OutsideStatementDetails',
+            keys: ["id", "processinstanceid", "flowtype"]
+          },
+          module: 'OuterStatement',
+          tabList: tabTitleSetting
+        }
+      ]
+    },
   };
   

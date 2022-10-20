@@ -1,9 +1,8 @@
-import { FilterOutline } from "@ant-design/icons";
 import { Input, Mask } from "antd-mobile";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { dealKeyReturnValue } from "../../../../utils";
-import ListFilter from "./list-filter";
+import ListFilter from "./filter-dialog";
 // import "@/assets/css/todoList.scss";
 const TopFilter = (props) => {
   const { t } = useTranslation();
@@ -15,9 +14,14 @@ const TopFilter = (props) => {
     setDownMenuKey(item.label);
     props.changeListType(item);
   };
+  const inputRef = useRef();
+  const reset = ()=>{
+    console.log('水水水水水水')
+    inputRef.current.setState({value: ''});
+  }
   return (
     <div className="flex filter-nav">
-      {props.listKeys?.myDealStatus?.search ? (
+      {props.listKeys?.myDealStatus?.search && (
         <div
           className={`handle-select ${
             showSheet ? "handle-select--active" : ""
@@ -37,16 +41,15 @@ const TopFilter = (props) => {
             {downMenuKey}
           </div>
         </div>
-      ) : (
-        ""
-      )}
+      ) }
 
       <Input
         placeholder="请输入内容"
-        value={value}
+        ref={inputRef}
         onFocus={()=> setShowSheet(false)}
-        onEnterPress={(val) => {
-          props.search(val);
+        onEnterPress={(e) => {
+          console.log(e.target);
+          e.target&& props.search(e.target.value);
         }}
         style={{ marginLeft: "0.4rem" }}
       />

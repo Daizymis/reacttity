@@ -26,7 +26,7 @@
 // 流程进度 + 客户侧基础信息 + 媒体侧基础信息 + 充值信息 +
 // 客户付款信息 + 媒体付款信息 +  （不同点）
 // 特批情况说明 + 撤单原因 + 流程观察者 + 临时流程参与者 + 流程共享人 + 附件 + 发表评论 + 修改记录 + 历史记录 + 驳回原因
-import { publicMenu } from 'pages/mobile/order/sideMenu/publicMenu';
+import { publicMenu } from '../publicMenu';
 const usualMenu = {
   starter: [
     {

@@ -5,15 +5,16 @@ const Random = Mock.Random;
 
 export default [
   {
-    url: "/loginCheck",
+    url: "/api/loginCheck",
     type: "post",
     response: (config) => {
       let request = JSON.parse(config.body);
       if (request.username === "guest" && request.password === "guest") {
         return {
           code: 201,
-          data: { token: "youaretheappleinmyeyes", userInfo:
-          "{\"id\":1,\"caid\":1,\"empid\":\"1\",\"deptid\":\"1\",\"name\":\"guest\",\"leadercaid\":544,\"leadername\":\"mary\"}" },
+          token: "youaretheappleinmyeyes",
+          userInfo:
+            {id:1,caid:1,"empid":"1","deptid":"1","name":"guest","leadercaid":544,"leadername":"mary"},
         };
       }
       return {

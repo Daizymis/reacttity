@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { use_a_download } from "../../../utils/file";
 import "@/assets/css/sign.scss";
 
-function Sign(props) {
+function Sign() {
   const myCanvas = useRef();
   let blankData;
   let ctx;
@@ -15,7 +15,6 @@ function Sign(props) {
     const img = new Image();
     img.src = "../../../assets/img/mobile/grid-back.png";
     img.onload = () => {
-      console.log("hhhhhh");
       let pattern = myCanvas.current.createPattern(img, "no-repeat");
       ctx.fillStyle = pattern;
       ctx.fillRect(0, 0, myCanvas.current.width, myCanvas.current.height);

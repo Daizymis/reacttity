@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import Cookies from "./cookie";
 let token = localStorage.getItem("setToken");
 import i18n from "i18next";
+const url = process.env.NODE_ENV === 'development' ? '' : '';
+console.log(url);
 let instance = axios.create({
   headers: {
     contentType: "application/json",
@@ -12,8 +14,12 @@ let instance = axios.create({
 });
 instance.interceptors.request.use(
   (config) => {
+    console.log(config);
     const token = localStorage.getItem("setToken");
     token && (config.headers.Authorization = token);
+    if(url && config.url.indexOf('api') > -1){
+      config.url = config.url.slice(4);
+    }
     return config;
   },
   (error) => {

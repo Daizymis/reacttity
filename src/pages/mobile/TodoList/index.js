@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { InfiniteScroll, Divider } from "antd-mobile";
 import { http } from "@/utils/index";
 import listTableInfo from "../../../listTable/mobile/listData";
 import "@/assets/css/todoList.scss";
 import { useTranslation } from "react-i18next";
-import { dealKeyReturnValue, dealKeyReturnValue1 } from "@/utils/index";
+import { dealKeyReturnValue } from "@/utils/index";
 import { connect } from "react-redux";
 import TopFilter from "./child/top-filter";
 import ListItem from "./child/list-item";
 import { useMemo } from "react";
-import ListFilter from "./child/list-filter";
+import FilterDialog from "./child/filter-dialog";
 import Loading from "../Loading";
 import useAsyncCallback from "../../../hook/useAsynState";
 import { dealObjValue } from "../../../utils";
 import { SET_DATAADAPT, SET_LISTDATAADAPT } from "../../../store/actionType";
 import listConfig from "../../../listTable/mobile/listConfig";
 function TodoList(props) {
-  let {listDataAdapt, setListDataAdapt, dataAdapt, setDataAdapt} = props;
+  let { listDataAdapt, setListDataAdapt, dataAdapt, setDataAdapt } = props;
+  const listFilter = useRef();
   let { type } = useParams();
-  type = "ProjectApproval";
   const [data, setData] = useState({
     listData: [],
     hasMore: false,
@@ -38,9 +38,8 @@ function TodoList(props) {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const [total, setTotal] = useState(0);
-  let [listKeys, setListKeys] = useState(() => listTableInfo["Order"]);
-  const listTypes = useMemo(()=> listConfig["Order"]);
-  console.log(listTypes);
+  let [listKeys, setListKeys] = useState(() => listTableInfo[type]);
+  const listTypes = useMemo(() => listConfig[type]);
   let [filterParams, setFilterParams] = useState({
     searchInfo: {},
   });
@@ -85,6 +84,7 @@ function TodoList(props) {
       ordername: val.orderName,
       orderby: val.orderBy,
     }));
+    // listFilter.current.reset();
   };
   const dealFormatList = async () => {
     let listItem = listKeys.listItem;
@@ -158,11 +158,11 @@ function TodoList(props) {
     loadMore();
   });
   const changeListType = (item) => {
-    console.log(listTypes.listdata);
-    const type = listTypes.listdata.filter(config => {
-      return item.value === config.value;
-    });
-    setListDataAdapt(type[0])
+    // const type = listTypes.listdata.filter(config => {
+    //   return item.value === config.value;
+    // });
+    // setListDataAdapt(type[0])
+    initSelectedData();
     setListdataurl(item.listdataurl);
     reFilterTable();
   };
@@ -174,7 +174,21 @@ function TodoList(props) {
     setData((prevState) => ({ ...prevState, listData: [], hasMore: true }));
     func();
   };
+  const search = (val) => {
+    console.log("------------------------");
+    console.log(val);
+    setFilterParams((prevState) => ({
+      ...prevState,
+      searchInfo: Object.assign({}, prevState.searchInfo, { value: val }),
+    }));
+    reFilterTable();
+    func();
+  };
   const navigate = useNavigate();
+  /**
+   * go to detail view
+   * @param {*} item
+   */
   const goToDetails = (item) => {
     let _postData = {};
     listDataAdapt?.postData?.keys?.forEach((val) => {
@@ -182,20 +196,24 @@ function TodoList(props) {
     });
     const timestamp = new Date().getTime();
     setDataAdapt({
-      url: listDataAdapt.url,
+      url: listDataAdapt.postData.url,
       postData: _postData,
-      timestamp: timestamp
+      timestamp: timestamp,
     });
-    navigate(`/${item.SystemCoreRoute}`, { timestamp: timestamp });
+    navigate(`/${item.SystemCoreRoute}?timestamp=${timestamp}`, {
+      timestamp: timestamp,
+    });
   };
   return (
     <div>
       {useMemo(() => {
         return (
           <TopFilter
+            ref={listFilter}
             listKeys={listKeys}
             changeListType={changeListType}
             setFilterVisible={setFilterVisible}
+            search={search}
           ></TopFilter>
         );
       }, [listKeys])}
@@ -250,7 +268,7 @@ function TodoList(props) {
       )}
 
       {
-        <ListFilter
+        <FilterDialog
           listKeys={listKeys}
           setFilterVisible={setFilterVisible}
           filterVisible={filterVisible}
@@ -258,27 +276,28 @@ function TodoList(props) {
           filterParams={filterParams}
           reset={reset}
           reFilterTable={reFilterTable}
-        ></ListFilter>
+        ></FilterDialog>
       }
     </div>
   );
 }
 const mapDispatchToProps = (dispatch) => {
-  return{ setListDataAdapt(data) {
-    dispatch({
-      type: SET_LISTDATAADAPT,
-      data
-    })
-  },
-  setDataAdapt(data) {
-    dispatch({
-      type: SET_DATAADAPT,
-      data
-    })
-  }
-}
-}
-const mapStateToProps = (state) =>{
-  return {listDataAdapt: state.listDataAdapt, dataAdapt: state.dataAdapt}
-}
+  return {
+    setListDataAdapt(data) {
+      dispatch({
+        type: SET_LISTDATAADAPT,
+        data,
+      });
+    },
+    setDataAdapt(data) {
+      dispatch({
+        type: SET_DATAADAPT,
+        data,
+      });
+    },
+  };
+};
+const mapStateToProps = (state) => {
+  return { listDataAdapt: state.listDataAdapt, dataAdapt: state.dataAdapt };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

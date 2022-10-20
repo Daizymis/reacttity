@@ -5,7 +5,7 @@ const Random = Mock.Random;
 
 export default [
   {
-    url: "/getmenus?type=1",
+    url: RegExp("api/getmenus"+".*"),
     type: "get",
     response: (config) => {
       const menuList = [
@@ -19,6 +19,8 @@ export default [
               muduleName: "合同",
               type:'Contract',
               imgUrl: "",
+              name: "合同",
+              route: 'todolist/ProjectApproval'
             },
             {
               id: 2,
@@ -26,6 +28,8 @@ export default [
               muduleName: "立项",
               type:'ProjectApproval',
               imgUrl: "",
+              name: "立项",
+              route: 'todolist/ProjectApproval'
             },
             {
               id: 3,
@@ -33,6 +37,8 @@ export default [
               muduleName: "开票",
               type:'Invoice',
               imgUrl: "",
+              name: "开票",
+              route: 'todolist/ProjectApproval'
             },
             {
               id: 4,
@@ -40,6 +46,8 @@ export default [
               muduleName: "结算单",
               type:'Statement',
               imgUrl: "",
+              name: "结算单",
+              route: 'todolist/OuterStatement'
             },
           ],
         },
