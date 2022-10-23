@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import { http } from "../../../utils";
 import "@/assets/css/menu.scss";
 import { useLocation, useNavigate } from "react-router";
-import { SET_LISTDATAADAPT } from "../../../store/actionType";
+import { setListDataAdapt } from "../../../store/action";
 import { connect } from "react-redux";
 import { dataAdaptUrl } from "../../../utils/config";
 function Menu(props) {
@@ -57,17 +57,8 @@ function Menu(props) {
     </div>
   );
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setListDataAdapt(data) {
-      dispatch({
-        type: SET_LISTDATAADAPT,
-        data,
-      });
-    },
-  };
-};
+
 const mapStateToProps = (state) => {
   return { listDataAdapt: state.listDataAdapt };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, {setListDataAdapt})(Menu);

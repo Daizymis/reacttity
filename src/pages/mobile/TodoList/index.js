@@ -14,7 +14,7 @@ import FilterDialog from "./child/filter-dialog";
 import Loading from "../Loading";
 import useAsyncCallback from "../../../hook/useAsynState";
 import { dealObjValue } from "../../../utils";
-import { SET_DATAADAPT, SET_LISTDATAADAPT } from "../../../store/actionType";
+import { setDataAdapt, setListDataAdapt } from "../../../store/action";
 import listConfig from "../../../listTable/mobile/listConfig";
 function TodoList(props) {
   let { listDataAdapt, setListDataAdapt, dataAdapt, setDataAdapt } = props;
@@ -281,23 +281,9 @@ function TodoList(props) {
     </div>
   );
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setListDataAdapt(data) {
-      dispatch({
-        type: SET_LISTDATAADAPT,
-        data,
-      });
-    },
-    setDataAdapt(data) {
-      dispatch({
-        type: SET_DATAADAPT,
-        data,
-      });
-    },
-  };
-};
 const mapStateToProps = (state) => {
   return { listDataAdapt: state.listDataAdapt, dataAdapt: state.dataAdapt };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default connect(mapStateToProps, { setListDataAdapt, setDataAdapt })(
+  TodoList
+);

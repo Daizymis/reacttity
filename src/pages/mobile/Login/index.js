@@ -3,19 +3,20 @@ import "@/assets/css/login.scss";
 import utils from "../../../utils";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
-import {LOGIN_OK} from '@/utils/code'
+import { LOGIN_OK } from "@/utils/code";
+import { login } from "../../../store/action";
 function Login(props) {
   const navigate = useNavigate();
   // const { locale} = useStore().getState();
   const onFinish = (values) => {
     if (values.password && values.username) {
-      values.language = 'CN';
+      values.language = "CN";
       utils.http.post("/api/loginCheck", values).then((res) => {
         localStorage.setItem("setToken", res.token || "");
         if (Number(res.code) === LOGIN_OK) {
           message.success("登录成功");
           props.login(res.userInfo);
-          localStorage.setItem('setToken', res.token);
+          localStorage.setItem("setToken", res.token);
           // Cookies.setCookie("login", "LOGIN_OK");
           // if (values.remember) {
           //   Cookies.setCookie("isChecked", this.isChecked);
@@ -26,7 +27,7 @@ function Login(props) {
           // const shortId = Cookies.getCookie("shortId");
           // const shortUrl = Cookies.getCookie("shortUrl");
           if (res.shortUrl != null) {
-            navigate("/e/" + shortId + "/" + shortUrl); 
+            navigate("/e/" + shortId + "/" + shortUrl);
           } else {
             navigate("/menu");
           }
@@ -89,20 +90,10 @@ function Login(props) {
     </div>
   );
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login(value) {
-      dispatch({
-        type: "setUserInfo",
-        value,
-      });
-    },
-  };
-};
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
     state,
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, { login })(Login);
