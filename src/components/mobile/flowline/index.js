@@ -5,14 +5,19 @@ import "@/assets/css/flowLine.scss";
 const flowLine = ({ processData, status }) => {
   console.log(statusList);
   const { Step } = Steps;
-  console.log("iii");
+
   return (
     <div className="progress">
-      <div class="progress-status font-PF-medium">
+      <div className="progress-status font-PF-medium">
         <p>流程进度</p>
         <p className={statusList[status]?.color}>{statusList[status]?.title}</p>
       </div>
-      <Steps progressDot current={status} direction="vertical">
+      <Steps progressDot current={status} direction="vertical" style={{
+            '--title-font-size': '44px',
+            '--description-font-size': '15px',
+            '--indicator-margin-right': '12px',
+            '--icon-size': '24px',
+          }}>
         {processData?.map((item) => {
           return (
             <Step

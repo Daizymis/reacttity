@@ -4,7 +4,7 @@ import utils from "../../../utils";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import { LOGIN_OK } from "@/utils/code";
-import { login } from "../../../store/action";
+import { setUserInfo } from "../../../store/action";
 function Login(props) {
   const navigate = useNavigate();
   // const { locale} = useStore().getState();
@@ -15,7 +15,7 @@ function Login(props) {
         localStorage.setItem("setToken", res.token || "");
         if (Number(res.code) === LOGIN_OK) {
           message.success("登录成功");
-          props.login(res.userInfo);
+          props.setUserInfo(res.userInfo);
           localStorage.setItem("setToken", res.token);
           // Cookies.setCookie("login", "LOGIN_OK");
           // if (values.remember) {
@@ -96,4 +96,4 @@ const mapStateToProps = (state) => {
     state,
   };
 };
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { setUserInfo })(Login);

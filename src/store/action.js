@@ -1,4 +1,3 @@
-import { changeLanguage } from "i18next";
 import * as types from "./actionType";
 import zhCN from "antd-mobile/es/locales/zh-CN";
 import enUS from "antd-mobile/es/locales/en-US";
@@ -16,7 +15,7 @@ export function logout(data) {
 export function changeLanguage(locale) {
   dispatch({ type: "change", value: locale });
 }
-export function login(value) {
+export function setUserInfo(value) {
   return (dispatch) =>
     dispatch({
       type: types.SET_USER_INFO,

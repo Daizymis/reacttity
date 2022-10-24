@@ -1,0 +1,26 @@
+.upload-list {
+  > div > div {
+    text-align: right;
+    // margin: 0.2rem;
+    line-height: 0.4rem;
+  }
+  &--name {
+    white-space: nowrap;
+    font-size: 0.24rem;
+    margin-right: 20px;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    color: #665e5e;
+    display: inline-block;
+    width: 85%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+  &--delete-icon {
+    float: right;
+    height: 0.24rem;
+    margin-top: 0.1rem;
+  }
+}

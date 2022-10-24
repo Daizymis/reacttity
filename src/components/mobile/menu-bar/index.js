@@ -1,12 +1,11 @@
 import { SideBar } from "antd-mobile";
 
-function MenuBar(props) {
-  let { sideMenus } = props;
+function MenuBar({ activeKey, sideMenus, setActiveKey }) {
   return (
     <>
-      <SideBar>
+      <SideBar activeKey={activeKey} onChange={setActiveKey}>
         {sideMenus.map((item, index) => (
-          <SideBar.Item key={item.label + index} title={item.label} />
+          <SideBar.Item key={index} title={item.label} />
         ))}
       </SideBar>
     </>
