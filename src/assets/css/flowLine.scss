@@ -1,6 +1,6 @@
 .progress {
   padding: 0.3rem 0 0 0;
-  height: 100%;
+  // height: 100%;
   background-color: #ffffff;
   &-status {
     display: flex;
@@ -10,7 +10,7 @@
     font-size: 0.35rem;
   }
   .ant-steps {
-    margin: 0 0.24rem;
+    padding: 0 0.24rem;
   }
   &-node {
     border-radius: 50%;
@@ -42,24 +42,42 @@
       //margin-right: 0.05rem;
     }
   }
+  @mixin dotSize {
+    width: 0.26rem;
+    height: 0.26rem;
+    border-radius: 0.26rem;
+    @extend .ant-steps-icon-dot;
+  }
   .bg-gray {
     .ant-steps-icon-dot {
       background-color: #d0ccc7 !important;
+    }
+    .adm-step-icon-dot {
+      @include dotSize();
     }
   }
   .bg-green {
     .ant-steps-icon-dot {
       background-color: #00ce6d !important;
     }
+    .adm-step-icon-dot {
+      @include dotSize();
+    }
   }
   .bg-orange {
     .ant-steps-icon-dot {
       background-color: #ffa300 !important;
     }
+    .adm-step-icon-dot {
+      @include dotSize();
+    }
   }
   .bg-red {
     .ant-steps-icon-dot {
       background-color: red !important;
+    }
+    .adm-step-icon-dot {
+      @include dotSize();
     }
   }
 }

@@ -31,16 +31,16 @@ instance.interceptors.response.use(
   (response) => {
     console.log(response);
     const UNAUTHORIZED = 401;
-    const { data } = response;
-    if (response.data.code == UNAUTHORIZED) {
+    const { data, data:{code, token} } = response;
+    if (code == UNAUTHORIZED) {
       localStorage.clear();
       localStorage.setItem("locale", i18n.language);
       localStorage.removeItem("myVuexs");
       Cookies.deleteCookie("cuessid");
       window.location.href = '/login';
       return;
-    } else if (response.data.token) {
-      axios.defaults.headers["Authorization"] = response.data.token;
+    } else if (token) {
+      axios.defaults.headers["Authorization"] = token;
     }
     return data;
   },

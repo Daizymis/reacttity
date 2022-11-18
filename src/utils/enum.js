@@ -42,3 +42,9 @@ export const colorList = {
     bg: "bg-red",
   },
 };
+
+export const FLOWTYPE = {
+  OTERSTATEMENT: 75
+}
+export const SUBMIT_OK = 200;
+export const SUBMIT_NO = 300;
