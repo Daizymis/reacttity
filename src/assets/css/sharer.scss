@@ -1,0 +1,22 @@
+.shares {
+    padding: 0.3rem 0 0 0.3rem;
+    min-height: 100%;
+    background-color: #ffffff;
+    font-size: 0.35rem;
+    .button {
+      margin: 0.23rem 0.2rem 0.4rem 0;
+      color: #1890ff;
+      background-color: #e1f0ff;
+    }
+    .share-list {
+      display: flex;
+      flex: 1;
+      flex-wrap: wrap;
+      margin: 0.38rem 0 0.13rem 0;
+    }
+    .share-name {
+      margin: 0 0.25rem 0.25rem 0;
+      padding: 0.25rem;
+      word-break: break-all;
+    }
+  }

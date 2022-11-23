@@ -1,0 +1,9 @@
+.detail {
+    .detail-sidebar .adm-side-bar-items{
+        height: 100%;
+        margin-bottom: 1.7rem;
+        &::-webkit-scrollbar {
+            display:none
+          }
+    }
+}

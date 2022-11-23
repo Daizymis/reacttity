@@ -1,6 +1,12 @@
 .bottom-btn {
+    .adm-popup-body.adm-popup-body-position-bottom ::-webkit-scrollbar {
+        display: none;
+    }
     width: 100%;
     height: 1.7rem;
+    &::-webkit-scrollbar {
+        display:none
+      }
     .adm-mask {
         background: none !important;
         top: 100%;

@@ -1,0 +1,92 @@
+.font-black {
+    color: #000;
+  }
+  .font-gray {
+    color: #8a8888;
+  }
+  .font-orange {
+    color: #f9c247;
+  }
+  .font-red {
+    color: red;
+  }
+  .font-blue {
+    color: #3b97ea;
+  }
+  .font-white {
+    color: #fff;
+  }
+  .font-green {
+    color: #00ce6d;
+  }
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+  }
+  // .bg-gray {
+  //   background-color: #d0ccc7;
+  // }
+  // .bg-green {
+  //   background-color: #00ce6d;
+  // }
+  // .bg-orange {
+  //   background-color: #ffa300;
+  // }
+  // .bg-red {
+  //   background-color: red;
+  // }
+  .font-PF-medium {
+    font-family: 'PingFangSC-Medium';
+    color: #333333;
+  }
+  .fz-28 {
+    font-size: 0.28rem;
+  }
+  .fz-35 {
+    font-size: 0.35rem;
+  }
+  .text-align-right {
+    text-align: right;
+  }
+  .text-align-left {
+    text-align: left;
+  }
+  .text-align-center {
+    text-align: center;
+  }
+  .pd-bottom-0 {
+    padding-bottom: 0;
+  }
+  .mt30 {
+    margin-top: 0.3rem;
+  }
+  .mt10 {
+    margin-top: 0.1rem;
+  }
+  .ml30{
+    margin-left: 0.3rem;
+  }
+  .ml40{
+    margin-left: 0.4rem;
+  }
+  .pr30{
+    padding-right: 0.3rem;
+  }
+  .flex-wrap{
+    flex-wrap: wrap;
+  }
+  .align-start {
+    align-items: flex-start;
+  }
+  .align-end {
+    align-items: flex-end;
+  }
+  

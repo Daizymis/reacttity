@@ -6,6 +6,8 @@ import MenuBar from "../../../components/mobile/menu-bar";
 import { http } from "../../../utils";
 import sideMenu from "./sideMenu";
 import "@/assets/css/outerStatement.scss";
+import "@/assets/css/mobile/common.scss"
+import "@/assets/css/mobile/detail.scss"
 import FlowLine from "../../../components/mobile/flowline";
 import Loading from "../Loading";
 import Upload from "../../../components/mobile/upload";
@@ -13,6 +15,7 @@ import ButtomButton from "../../../components/mobile/buttom-button";
 import { useRef } from "react";
 import { FLOWTYPE, SUBMIT_NO, SUBMIT_OK } from "../../../utils/enum";
 import { approvalWorkFlowUrl } from "../../../utils/config";
+import { Sharers } from "../../../components/mobile/process/sharers";
 
 function OuterStatement(props) {
   const flowType = FLOWTYPE.OTERSTATEMENT;
@@ -53,6 +56,7 @@ function OuterStatement(props) {
     <Loading></Loading>;
   });
   const getPublicMenuIndex = useCallback((key) => {
+    console.log(key);
     return sideMenus?.findIndex((item) => item.key === key);
   });
   //撤回
@@ -185,10 +189,10 @@ function OuterStatement(props) {
     console.log(uploadFiles);
   };
   return (
-    <div style={{ height: "100vh" }}>
+    <div className="detail" style={{ height: "100vh" }}>
       {/* {showLoading && Loading()} */}
       <Grid columns={24} gap={8} style={{ height: "100%" }}>
-        <Grid.Item span={5}>
+        <Grid.Item  className="detail-sidebar" span={5}>
           <MenuBar
             sideMenus={sideMenus}
             activeKey={activeKey}
@@ -196,28 +200,36 @@ function OuterStatement(props) {
           ></MenuBar>
         </Grid.Item>
         <Grid.Item span={19} className="detail-nav">
-          {activeKey === "0" &&
-            (getData ? (
-              <FlowLine
-                status={getData?.workflowEntity?.status}
-                processData={getData?.flowLine}
-              ></FlowLine>
-            ) : (
-              Loading()
-            ))}
+          {(() => {
+            switch (activeKey) {
+              case "0":
+                return getData ? (
+                  <FlowLine
+                    status={getData?.workflowEntity?.status}
+                    processData={getData?.flowLine}
+                  ></FlowLine>
+                ) : (
+                  Loading()
+                );
+              case getPublicMenuIndex("processSharers") +"":
+                return (
+                  getData && <Sharers
+                    owners={getData.owners}
+                    isOwner={getData.isOwner}
+                    flowType={getData.workflowEntity.flowtype}
+                    processInstanceId={getData.workflowEntity.processinstanceid}
+                    userInfo={props.userInfo}
+                  ></Sharers>
+                );
+              case String(1+2):
+                return <></>;
+              case "3":
+                return <></>;
+              default:
+                return null;
+            }
+          })()}
 
-          <Upload
-            onSuccess={(ev, file, uploadFiles) => log(ev, file, uploadFiles)}
-            onChange={log}
-            onError={log}
-            name="attachment"
-            action="mock/file/uploadAttachmentMock"
-            multiple={true}
-          >
-            <Button block type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Upload>
           {/* <input onChange={(e)=>onChange(e)} type="file"></input> */}
         </Grid.Item>
       </Grid>
@@ -238,6 +250,6 @@ function OuterStatement(props) {
   );
 }
 const mapStateToProps = (state) => {
-  return { dataAdapt: state.dataAdapt };
+  return { dataAdapt: state.dataAdapt,userInfo: state.userInfo, };
 };
 export default connect(mapStateToProps)(OuterStatement);
