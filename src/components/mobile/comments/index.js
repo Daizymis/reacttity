@@ -1,15 +1,18 @@
 import { useTranslation } from "react-i18next";
 import { Button, TextArea, Popup } from "antd-mobile";
+import { Tag } from "../tag/index";
 import { useState } from "react";
 import "./index.scss";
+import Filter from "../filter";
 
 export const Comments = (props) => {
-  const { commentsList } = props;
+  const { commentsList, recipients } = props;
   const { t, i18n } = useTranslation();
   const [showPopup, setShowPopup] = useState(false);
   let [commentText, setCommentText] = useState("");
   const [emlNodes, setEmlNodes] = useState([]);
   const [attachments, setAttachments] = useState([]);
+  const [showPicker, setShowPicker] = useState(false);
   /**
    * 打开编辑评论内容弹窗
    */
@@ -30,7 +33,9 @@ export const Comments = (props) => {
   /**
    * 打开邮件接收人选择器
    */
-  const openPicker = () => {};
+  const openPicker = () => {
+    setShowPicker(true);
+  };
   return (
     <div className="comment">
       <div className="flex-between">
@@ -114,17 +119,17 @@ export const Comments = (props) => {
                 <p className="comment-eml-tip">请选择需查收邮件节点</p>
               ) : (
                 <div className="node-list">
-                  {emlNodes.map((item) => (
+                  {emlNodes.map((item, index) => (
                     <Tag
-                      className="node-name"
-                      onClick={() => deleteNode(index)}
-                      key={item.caid}
-                      round
-                      color="#e1f0ff"
-                      style={{ "--text-color": "#1890FF" }}
-                    >
-                      {item.name}
-                    </Tag>
+                    key={item.caid}
+                    closeable={true}
+                    className="share-name"
+                    color="#E1F0FF"
+                    textcolor="#1890FF"
+                    close={() => deleteNode(index)}
+                  >
+                    {item.name}
+                  </Tag>
                   ))}
                 </div>
               )}
@@ -132,6 +137,7 @@ export const Comments = (props) => {
           </div>
         )}
       </Popup>
+        {showPicker && <Filter setShowPicker={setShowPicker} options={recipients} search-value="item"></Filter>}
     </div>
   );
 };

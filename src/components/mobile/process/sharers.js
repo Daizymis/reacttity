@@ -1,7 +1,7 @@
 import { http } from "../../../utils";
 import { SUBMIT_NO, SUBMIT_OK } from "../../../utils/config";
 import { Tag } from "../tag/index";
-import { Button, Space } from "antd-mobile";
+import { Button, Space, Toast } from "antd-mobile";
 import { AddOutline } from "antd-mobile-icons";
 import "@/assets/css/sharer.scss";
 export const Sharers = (props) => {
