@@ -6,8 +6,8 @@ import MenuBar from "../../../components/mobile/menu-bar";
 import { http } from "../../../utils";
 import sideMenu from "./sideMenu";
 import "@/assets/css/outerStatement.scss";
-import "@/assets/css/mobile/common.scss"
-import "@/assets/css/mobile/detail.scss"
+import "@/assets/css/mobile/common.scss";
+import "@/assets/css/mobile/detail.scss";
 import FlowLine from "../../../components/mobile/flowline";
 import Loading from "../Loading";
 import Upload from "../../../components/mobile/upload";
@@ -16,7 +16,7 @@ import { useRef } from "react";
 import { FLOWTYPE, SUBMIT_NO, SUBMIT_OK } from "../../../utils/enum";
 import { approvalWorkFlowUrl } from "../../../utils/config";
 import { Sharers } from "../../../components/mobile/process/sharers";
-
+import { Comments } from "../../../components/mobile/comments";
 function OuterStatement(props) {
   const flowType = FLOWTYPE.OTERSTATEMENT;
   const { dataAdapt } = props;
@@ -192,7 +192,7 @@ function OuterStatement(props) {
     <div className="detail" style={{ height: "100vh" }}>
       {/* {showLoading && Loading()} */}
       <Grid columns={24} gap={8} style={{ height: "100%" }}>
-        <Grid.Item  className="detail-sidebar" span={5}>
+        <Grid.Item className="detail-sidebar" span={5}>
           <MenuBar
             sideMenus={sideMenus}
             activeKey={activeKey}
@@ -211,20 +211,36 @@ function OuterStatement(props) {
                 ) : (
                   Loading()
                 );
-              case getPublicMenuIndex("processSharers") +"":
+              case getPublicMenuIndex("processSharers") + "":
                 return (
-                  getData && <Sharers
-                    owners={getData.owners}
-                    isOwner={getData.isOwner}
-                    flowType={getData.workflowEntity.flowtype}
-                    processInstanceId={getData.workflowEntity.processinstanceid}
-                    userInfo={props.userInfo}
-                  ></Sharers>
+                  getData && (
+                    <Sharers
+                      owners={getData.owners}
+                      isOwner={getData.isOwner}
+                      flowType={getData.workflowEntity.flowtype}
+                      processInstanceId={
+                        getData.workflowEntity.processinstanceid
+                      }
+                      userInfo={props.userInfo}
+                    ></Sharers>
+                  )
                 );
-              case String(1+2):
+              case String(1 + 2):
                 return <></>;
-              case "3":
-                return <></>;
+              case getPublicMenuIndex("postComments") + "":
+                return (
+                  getData && (
+                    <Comments
+                      commentsList={getData.comments}
+                      recipients={getData.Recipients}
+                      flow-type={getData.workflowEntity.flowtype}
+                      process-instance-id={
+                        getData.workflowEntity.processinstanceid
+                      }
+                      reloadPage={getDetailsData}
+                    ></Comments>
+                  )
+                );
               default:
                 return null;
             }
@@ -250,6 +266,6 @@ function OuterStatement(props) {
   );
 }
 const mapStateToProps = (state) => {
-  return { dataAdapt: state.dataAdapt,userInfo: state.userInfo, };
+  return { dataAdapt: state.dataAdapt, userInfo: state.userInfo };
 };
 export default connect(mapStateToProps)(OuterStatement);

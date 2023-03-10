@@ -35,6 +35,9 @@ function TodoList(props) {
       pagesize: 20,
     },
   });
+  useEffect(() =>{
+   document.title =  listTableInfo[type].typeDesc;
+  })
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const [total, setTotal] = useState(0);

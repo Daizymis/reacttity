@@ -1,0 +1,122 @@
+.detail-upload {
+  width: 4.2rem;
+  margin-left: -0.15rem;
+  .el-upload {
+    display: none;
+  }
+}
+.margin-upload {
+  margin-top: 0.25rem;
+}
+.comment-popup {
+  &-input {
+    .van-field__control {
+      width: 6.75rem;
+      height: 3.65rem;
+    }
+  }
+}
+.comment {
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  //min-height: 100%;
+  background-color: #ffffff;
+  font-size: 0.35rem;
+  color: #333333;
+  &-button {
+    margin: 0 0.3rem 0 0;
+    color: #1890ff;
+    background-color: #e1f0ff;
+  }
+  &-detail {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.45rem;
+    margin-right: 0.2rem;
+    font-size: 0.28rem;
+    .comment-title {
+      font-size: 0.28rem;
+    }
+    &-img {
+      width: 0.78rem;
+      height: 0.78rem;
+      border-radius: 50%;
+      margin-right: 0.26rem;
+    }
+    .detail-name {
+      margin-bottom: 0.11rem;
+      word-break: break-all;
+    }
+    .detail-content {
+      margin-bottom: 0.06rem;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4; //超出几行后会开始隐藏
+    }
+    .node-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      &-name {
+        margin-right: 0.1rem;
+        word-break: break-all;
+      }
+    }
+    .node-time {
+      color: #999999;
+      font-size: 0.24rem;
+      margin-top: 0.04rem;
+    }
+  }
+}
+.comment-popup {
+  .adm-popup-body{
+    padding: 1rem 0.36rem 0 0.36rem;
+  }
+  &-input {
+    > .adm-text-area {
+      width: 6.75rem;
+      height: 3.65rem;
+      background-color: #fafafa;
+    }
+  }
+  .comment-eml {
+    &-info {
+      margin-top: 0.32rem;
+      padding: 0 0 0.09rem 0;
+      border-bottom: 0.01rem solid #d9d9d9;
+      .comment-eml-tip {
+        font-size: 0.32rem;
+        color: #cbc9c9;
+      }
+    }
+    .node-list {
+      display: flex;
+      flex: 1;
+      flex-wrap: wrap;
+      margin: 0.38rem 0 0 0;
+    }
+    .node-name {
+      margin: 0 0.2rem 0.2rem 0;
+      padding: 0.2rem;
+    }
+  }
+  .submit-btn {
+    position: absolute;
+    //margin: 0 0.3rem 0.4rem 0;
+    bottom: 0.4rem;
+    width: 6.89rem;
+    height: 0.9rem;
+  }
+  &-upload {
+    width: 100%;
+    font-size: 0.24rem;
+  }
+  .comment-node-title {
+    margin-top: 0.45rem;
+    font-size: 0.32rem;
+    color: #333333;
+  }
+}
