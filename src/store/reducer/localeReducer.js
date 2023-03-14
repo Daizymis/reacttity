@@ -7,6 +7,7 @@ export default function localeReducer(
 ) {
   switch (action.type) {
     case "change":
+      localStorage.setItem('locale', action.value);
       return action.value;
     default:
       return "zhCN";
