@@ -49,3 +49,7 @@ export const throttle = (fn, wait = 300) => {
     });
   };
 };
+
+export function _none(v, str = '-') {
+  return v === null || v === undefined || v === 'undefined' || v === '' ? str : v;
+}
