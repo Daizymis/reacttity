@@ -17,6 +17,7 @@ import { FLOWTYPE, SUBMIT_NO, SUBMIT_OK } from "../../../utils/enum";
 import { approvalWorkFlowUrl } from "../../../utils/config";
 import { Sharers } from "../../../components/mobile/process/sharers";
 import { Comments } from "../../../components/mobile/comments";
+import ModifyRecord from "../../../components/mobile/modify-record";
 function OuterStatement(props) {
   const flowType = FLOWTYPE.OTERSTATEMENT;
   const { dataAdapt } = props;
@@ -240,6 +241,14 @@ function OuterStatement(props) {
                       reloadPage={getDetailsData}
                     ></Comments>
                   )
+                );
+              case getPublicMenuIndex("modifyRecords") + "":
+                return (
+                    getData && (
+                        <ModifyRecord
+                            records={getData.modifyLogs}
+                        ></ModifyRecord>
+                    )
                 );
               default:
                 return null;

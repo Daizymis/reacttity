@@ -1,15 +1,16 @@
 import { Divider, Steps } from "antd-mobile";
 import { statusList, colorList } from "../../../utils/enum";
 import "@/assets/css/flowLine.scss";
+import {useTranslation} from "react-i18next";
 
 const flowLine = ({ processData, status }) => {
   console.log(statusList);
   const { Step } = Steps;
-
+    const { t } = useTranslation();
   return (
     <div className="progress">
       <div className="progress-status font-PF-medium">
-        <p>流程进度</p>
+        <p>{ t('listPage.status')}</p>
         <p className={statusList[status]?.color}>{statusList[status]?.title}</p>
       </div>
       <Steps progressDot current={status} direction="vertical" style={{
