@@ -87,6 +87,8 @@ const normalLangEn = {
     }
   ],
   directCustomer: 'Direct',
-  agent: 'Agent'
+  agent: 'Agent',
+  notOpen: 'Coming Soon',
+  noPermissions: 'NO Permission',
 };
 export default normalLangEn;

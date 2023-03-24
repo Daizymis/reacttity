@@ -43,4 +43,44 @@ export default [
       };
     },
   },
+  {
+    url: '/user/permissions',
+    type: "post",
+    response: () =>{
+      const permissions = [
+        "Entrance::CustPayment",
+        "Entrance:RegisterForm",
+        "Entrance:CustomerSettings",
+        "Entrance:SystemSet",
+        "Entrance:TicketReview",
+        "Entrance:ProjectApproval",
+        "Entrance:Order",
+        "Entrance:SalesContractReview",
+        "Entrance:SalesOtherContract",
+        "Entrance:CostContract",
+        "Entrance:CSOrder",
+        "Entrance:UniversalProjectApproval",
+        "Entrance:Pusher",
+        "Entrance:DataShare",
+        "Entrance:BackOrder",
+        "Entrance:CIMSPurchaseOrder",
+        "Entrance:SupplierInvoice",
+        "Entrance:BizsOpportunity",
+        "Entrance:CustomerAccount",
+        "Entrance:CIMSAfterPurchaseOrder",
+        "Entrance:BatchReOrder",
+        "Entrance:Statement",
+        "Entrance:StatementStamp",
+        "Entrance:OuterStatement",
+        "Entrance:BackPayment",
+        "Entrance:SaleOrder",
+      ];
+      return {
+        code: 200,
+        data: {
+          permissions
+        }
+      }
+    }
+  }
 ];

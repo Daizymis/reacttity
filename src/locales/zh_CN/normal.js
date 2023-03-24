@@ -86,6 +86,8 @@ const normalLangZh = {
     }
   ],
   directCustomer: '直属客户',
-  agent: '代理商'
+  agent: '代理商',
+  notOpen: '功能未开放',
+  noPermissions: '暂无操作权限',
 };
 export default normalLangZh;
