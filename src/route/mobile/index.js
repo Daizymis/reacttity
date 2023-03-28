@@ -3,6 +3,7 @@ import { Navigate, useRoutes } from "react-router";
 import React from "react";
 import NotFound from "@/pages/NotFound";
 import Loading from "../../pages/mobile/Loading";
+import UniversalProjectApproval from "../../pages/UniversalProjectApproval";
 
 const Menu = React.lazy(() => import("@/pages/mobile/Menu"));
 const Login = React.lazy(() => import("@/pages/mobile/Login"));
@@ -12,9 +13,9 @@ const My = React.lazy(() => import("@/pages/mobile/My"));
 const Sign = React.lazy(() => import("@/pages/mobile/Sign"));
 const OrderDetail = React.lazy(() => import("@/pages/mobile/Order/index"));
 const OuterStatementDetail = React.lazy(() =>import("@/pages/mobile/OuterStatement/index"));
-const routerConfig = [
+const mobileRoutes = [
   {
-    path: "/", 
+    path: "/",
     element: <Navigate to="/login" />,
   },
   {
@@ -88,14 +89,17 @@ const routerConfig = [
     )
   },
   {
+    path: 'UniversalProjectApprovalDetail',
+    element: (
+        <Suspense fallback={<Loading />}>
+          <UniversalProjectApproval />
+        </Suspense>
+    )
+  },
+  {
     path: "*",
     element: <NotFound />,
   },
 ];
 
-const Router = () => {
-  const routes = useRoutes(routerConfig);
-  return routes;
-};
-
-export default Router;
+export default  mobileRoutes;

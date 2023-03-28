@@ -16,10 +16,6 @@ const routerConfig = [
             </Suspense>
         ),
     },
-    ]
-const PcRouter = () => {
-    const routes = useRoutes(routerConfig);
-    return routes;
-};
+];
 
-export default PcRouter;
+export default routerConfig;
