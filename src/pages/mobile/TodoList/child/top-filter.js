@@ -49,7 +49,7 @@ const TopFilter = (props) => {
         onFocus={()=> setShowSheet(false)}
         onEnterPress={(e) => {
           console.log(e.target);
-          e.target&& props.search(e.target.value);
+          e.target&& props.search(e.target.value.trim());
         }}
         style={{ marginLeft: "0.4rem" }}
       />

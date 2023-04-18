@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { Button, TextArea, Popup } from "antd-mobile";
 import { Tag } from "../tag/index";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./index.scss";
 import Filter from "../filter";
+import {message} from "antd";
+import {http} from "../../../utils";
 
 export const Comments = (props) => {
   const { commentsList, recipients } = props;
@@ -36,6 +38,42 @@ export const Comments = (props) => {
   const openPicker = () => {
     setShowPicker(true);
   };
+  /**
+   * 提交评论内容
+   */
+  const submitComments = ()=>{
+    if (!commentText) {
+      message.error(t('normalLang.commentsWarning'))
+      return;
+    }
+    // 国际化：中文模式下才需要判断
+    if (i18n.language === 'zhCN' && emlNodes.length === 0) {
+      message.error('请选择需查收邮件节点！');
+      return;
+    }
+    http.request({
+
+    })
+    http.post(`savecomments`, {
+      processinstanceid: processInstanceId,
+      flowtype: flowType,
+      name: this.userInfo.name,
+      content: commentText,
+      attachments: attachments,
+      Recipients: emlNodes,
+      empid: userInfo.empid,
+      replyid: ''
+    }).then(res => {
+      if (res.code === SUBMIT_OK) {
+        message.success(t('listPage.submitSuccess'));
+        setShowPopup(false);
+        props.reloadPage();
+      } else if (res.code == SUBMIT_NO) {
+        message.error(res.message || t('normalLang.systemException'))
+      }
+    });
+  }
+
   return (
     <div className="comment">
       <div className="flex-between">
@@ -99,7 +137,7 @@ export const Comments = (props) => {
       >
         <div className="comment-popup-input">
           <TextArea
-            placeholder="请输入内容"
+            placeholder={t('normalLang.pleaseInputContent')}
             value={commentText}
             onChange={(val) => {
               setCommentText(val);
@@ -134,10 +172,15 @@ export const Comments = (props) => {
                 </div>
               )}
             </div>
+            <div class="submit-btn">
+            <Button block color='primary' size='large' shape='rounded' onClick={() =>submitComments()}>
+              {t('normalLang.addComments')}
+            </Button>
+          </div>
           </div>
         )}
       </Popup>
-        {showPicker && <Filter setShowPicker={setShowPicker} options={recipients} search-value="item"></Filter>}
+        {showPicker && <Filter setShowPicker={setShowPicker} options={recipients} label="name" search-value="item"></Filter>}
     </div>
   );
 };

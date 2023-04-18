@@ -1,0 +1,23 @@
+.log {
+  padding: 0.29rem 0.1rem 0 0.3rem;
+  &-title {
+    font-size: 0.35rem;
+    margin-bottom: 0.25rem;
+  }
+  &-detail {
+    font-size: 0.28rem;
+    margin-bottom: 0.3rem;
+    .time {
+      font-size: 0.24rem;
+      color: #999999;
+      margin: 0 0 0 0.2rem;
+    }
+    &-info {
+      font-size: 0.26rem;
+      margin-top: 0.22rem;
+    }
+    .font-color {
+      color: #1890ff
+    }
+  }
+}
