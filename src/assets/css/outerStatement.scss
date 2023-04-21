@@ -4,3 +4,111 @@
     padding-bottom: 1.7rem;
     overflow-y: auto;
 }
+.basic-info {
+    padding: 0.5rem 0.31rem 0 0.37rem;
+    .title {
+        font-size: 0.28rem;
+        line-height: 0.4rem;
+        font-weight: 500;
+        margin-bottom: 0.24rem;
+    }
+    .detail-row {
+        font-size: 0.28rem;
+        margin-bottom: 0.36rem;
+        position: relative;
+    }
+}
+.content-title {
+    font-size: 0.28rem;
+    line-height: 0.4rem;
+    color: #333333;
+    word-break: break-all;
+}
+.content-content {
+    font-size: 0.28rem;
+    line-height: 0.4rem;
+    text-align: right;
+    color: #333333;
+    word-break: break-all;
+}
+.grid-title {
+    font-size: 0.28rem;
+    color: #999999;
+    line-height: 0.4rem;
+    word-break: break-all;
+    margin-top: 0.08rem;
+    width: 100%;
+    display: inline-block;
+}
+.grid-content {
+    font-size: 0.28rem;
+    color: #333333;
+    line-height: 0.3rem;
+    word-break: break-all;
+    width: 100%;
+    margin-top: 0.2rem;
+    display: inline-block;
+}
+.grid-table {
+    margin-top: 0.2rem;
+    z-index: 0;
+    .adm-grid-item:nth-child(2n-1) {
+        .grid-title {
+            padding: 0 0.2rem 0 0.1rem;
+        }
+        .grid-content {
+            padding: 0 0.2rem 0 0.1rem;
+        }
+    }
+    .adm-grid-item:nth-child(2n) {
+        .grid-title {
+            text-align: right;
+            padding: 0 0.1rem 0 0.2rem;
+        }
+        .grid-content {
+            text-align: right;
+            padding: 0 0.1rem 0 0.2rem;
+        }
+    }
+}
+.total-amount-font {
+    font-size: 0.45rem;
+    font-weight: 500;
+    color: #333333;
+    line-height: 0.54rem;
+    margin-top: 0.08rem;
+}
+.orange::before {
+    content: '';
+    position: absolute;
+    width: 0.1rem;
+    height: 0.3rem;
+    background-color: #d46b08;
+    z-index: 1;
+}
+.correlate-title {
+    margin-top: 0.28rem;
+    margin-left: 0.37rem;
+}
+.collapse-nav {
+    margin-top: 0.28rem;
+    margin-bottom: 0.28rem;
+    ///deep/.van-cell__right-icon {
+    //    font-size: 0.28rem;
+    //    line-height: 0.34rem;
+    //}
+    .collapse-title {
+        font-weight: 600;
+        margin-left: 0.2rem;
+    }
+    .detail-row {
+        margin-left: 0.2rem;
+        margin-right: 0.2rem;
+    }
+}
+.total-amount-nav {
+    margin-left: 0.45rem;
+}
+.color-red {
+    color: red;
+}
