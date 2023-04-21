@@ -157,7 +157,9 @@ function TodoList(props) {
       await getTodoList();
     }
   }
-  const func = useAsyncCallback(() => loadMore);
+  const func = useAsyncCallback(() => {
+    loadMore();
+  });
   const changeListType = (item) => {
     // const type = listTypes.listdata.filter(config => {
     //   return item.value === config.value;
