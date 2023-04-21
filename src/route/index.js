@@ -8,7 +8,7 @@ const isTablet =
 const routesConfig =
     /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) && !isTablet == true ? require('./mobile/index') : require('./pc/index');
 
-console.log(routesConfig.default);
+// console.log(routesConfig.default);
 
 const Router = () => {
     const routes = useRoutes(routesConfig.default);

@@ -1,18 +1,20 @@
 import { Popup, SearchBar, Input, Calendar, Button } from "antd-mobile";
-import { useCallback, useState } from "react";
+import {memo, useCallback, useState} from "react";
 import { useTranslation } from "react-i18next";
 import "@/assets/css/listFilter.scss";
 import moment from "moment";
-const ListFilter = (props) => {
-  console.log(props);
+const ListFilter = memo((props) => {
   const {
     filterVisible,
     setFilterVisible,
     listKeys,
+    returnFilterData,
+    reFilterTable,
+    reset,
     filterParams: checkedValue,
   } = props;
   const { t } = useTranslation();
-  const [custmizeData, setCustmizeData] = useState({
+  const [customizeData, setCustomizeData] = useState({
     showTimer: false,
     customKey: "",
   });
@@ -35,15 +37,15 @@ const ListFilter = (props) => {
     if (type === "date") {
       setTimeSelected({ [key]: item.label });
       if (timeSelect(item.label) === "自定义") {
-        setCustmizeData((prevState) => ({ ...prevState, customKey: key }));
+        setCustomizeData((prevState) => ({ ...prevState, customKey: key }));
         return;
       }
-      props.returnFilterData({
+      returnFilterData({
         key: key,
         value: timeSelect(item.value),
       });
     } else {
-      props.returnFilterData({
+      returnFilterData({
         key: key,
         value: item.value,
       });
@@ -68,14 +70,14 @@ const ListFilter = (props) => {
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 29);
       return [start.format("yyyy-MM-dd"), end.format("yyyy-MM-dd")];
     } else if (value === "自定义") {
-      setCustmizeData((prevState) => ({ ...prevState, showTimer: true }));
+      setCustomizeData((prevState) => ({ ...prevState, showTimer: true }));
       // setFilterVisible(false);
       return "自定义";
     } else {
       return "";
     }
   };
-  const returnPickerVal = (item) => {
+  const returnPickerVal = useCallback(item => {
     const obj = item.format.find((res) => {
       return res.value === checkedValue[item.key];
     });
@@ -83,15 +85,15 @@ const ListFilter = (props) => {
       return obj.label;
     }
     return "";
-  };
+  }, []);
   const openPick = () => {};
   const onConfirmDate = () => {
-    setCustmizeData(prevState=> ({...prevState, showTimer: false}))
-    const time = custmizeData.custTime.map((item) => {
+    setCustomizeData(prevState=> ({...prevState, showTimer: false}))
+    const time = customizeData.custTime.map((item) => {
       return moment(item)?.format("yyyy-MM-DD");
     });
-    props.returnFilterData({
-      key: custmizeData.customKey,
+    returnFilterData({
+      key: customizeData.customKey,
       value: time,
     });
   };
@@ -147,7 +149,7 @@ const ListFilter = (props) => {
                                 placeholder="请输入内容"
                                 value={checkedValue[item.key]}
                                 onChange={(val) => {
-                                  props.returnFilterData({
+                                  returnFilterData({
                                     key: item.key,
                                     value: val,
                                   });
@@ -207,9 +209,9 @@ const ListFilter = (props) => {
           </div>
 
           <div className="filter-btn">
-            <div onClick={() => props.reset()}>重置</div>
+            <div onClick={() => reset()}>重置</div>
             <div
-              onClick={() => (props.reFilterTable(), setFilterVisible(false))}
+              onClick={() => (reFilterTable(), setFilterVisible(false))}
             >
               确定
             </div>
@@ -218,25 +220,25 @@ const ListFilter = (props) => {
       </Popup>
 
       <Popup
-        visible={custmizeData.showTimer}
+        visible={customizeData.showTimer}
         onMaskClick={() => {
-          setCustmizeData(prevState=> ({...prevState, showTimer: false}))
+          setCustomizeData(prevState=> ({...prevState, showTimer: false}))
         }}
         position="bottom"
         bodyStyle={{ height: "77vh" }}
       >
         <Calendar
-          defaultValue={custmizeData.custTime}
+          defaultValue={customizeData.custTime}
           selectionMode="range"
           min={new Date(2000, 1, 1)}
           max={new Date(2050, 1, 1)}
-          onChange={(val) => setCustmizeData((prevState)=> ({...prevState, custTime: val}))}
+          onChange={(val) => setCustomizeData((prevState)=> ({...prevState, custTime: val}))}
         />
-        <Button block color='primary' size='large' onClick={onConfirmDate} disabled={!custmizeData.custTime}>
+        <Button block color='primary' size='large' onClick={onConfirmDate} disabled={!customizeData.custTime}>
           确认
         </Button>
       </Popup>
     </>
   );
-};
+});
 export default ListFilter;

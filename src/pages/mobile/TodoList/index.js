@@ -35,9 +35,9 @@ function TodoList(props) {
       pagesize: 20,
     },
   });
-  useEffect(() =>{
-   document.title =  listTableInfo[type].typeDesc;
-  })
+  useEffect(() => {
+    document.title = listTableInfo[type].typeDesc;
+  });
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const [total, setTotal] = useState(0);
@@ -157,9 +157,7 @@ function TodoList(props) {
       await getTodoList();
     }
   }
-  const func = useAsyncCallback(() => {
-    loadMore();
-  });
+  const func = useAsyncCallback(() => loadMore);
   const changeListType = (item) => {
     // const type = listTypes.listdata.filter(config => {
     //   return item.value === config.value;
@@ -178,8 +176,6 @@ function TodoList(props) {
     func();
   };
   const search = (val) => {
-    console.log("------------------------");
-    console.log(val);
     setFilterParams((prevState) => ({
       ...prevState,
       searchInfo: Object.assign({}, prevState.searchInfo, { value: val }),
@@ -271,6 +267,7 @@ function TodoList(props) {
       )}
 
       {
+        // 筛选弹窗
         <FilterDialog
           listKeys={listKeys}
           setFilterVisible={setFilterVisible}
