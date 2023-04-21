@@ -26,6 +26,8 @@ import { Comments } from "../../../components/mobile/comments";
 import ModifyRecord from "../../../components/mobile/modify-record";
 import { useTranslation } from "react-i18next";
 import { StatementList } from "./child/statementList";
+import {ProcessObserver} from "../../../components/mobile/process/processObserver";
+import {Participant} from "../../../components/mobile/process/participant";
 function OuterStatement(props) {
   const flowType = FLOWTYPE.OTERSTATEMENT;
   const { dataAdapt } = props;
@@ -205,6 +207,10 @@ function OuterStatement(props) {
     console.log(file);
     console.log(uploadFiles);
   };
+  const isProcessIncomplete = useCallback(() =>{
+    return getData.workflowEntity.status === 0 ||getData.workflowEntity.status=== 1;
+  },[getData])
+
   return (
     <div className="detail" style={{ height: "100vh" }}>
       {/* {showLoading && Loading()} */}
@@ -445,6 +451,8 @@ function OuterStatement(props) {
                     orders={postData.orders}
                   ></StatementList>
                 );
+              case getPublicMenuIndex('processObserver') + '' :
+                return <ProcessObserver observer={getData.Observer}></ProcessObserver>
               case getPublicMenuIndex("postComments") + "":
                 return (
                   getData && (
@@ -459,6 +467,16 @@ function OuterStatement(props) {
                     ></Comments>
                   )
                 );
+              case getPublicMenuIndex("processParticipants") + "":
+                return <Participant
+                    interimObserver={getData.observers}
+                    processPromoters={getData.candidates}
+                    isProcessIncomplete={isProcessIncomplete()}
+                    isCandidate={getData.isCandidate}
+                    operateStep={getData.workflowEntity.status}
+                    starterName={getData.workflowEntity.name}
+                    processInstanceId={getData.workflowEntity.processinstanceid}
+                    reloadPage={getDetailsData}></Participant>
               case getPublicMenuIndex("modifyRecords") + "":
                 return (
                   getData && (
