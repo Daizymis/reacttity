@@ -172,7 +172,7 @@ export const Comments = (props) => {
                 </div>
               )}
             </div>
-            <div class="submit-btn">
+            <div className="submit-btn">
             <Button block color='primary' size='large' shape='rounded' onClick={() =>submitComments()}>
               {t('normalLang.addComments')}
             </Button>

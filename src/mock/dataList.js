@@ -18,7 +18,7 @@ export default [
               flowType: 1,
               muduleName: "合同",
               type:'Contract',
-              imgUrl: "",
+              impurl: "",
               name: "合同",
               route: 'todolist/ProjectApproval'
             },
@@ -27,7 +27,8 @@ export default [
               flowType: 2,
               muduleName: "立项",
               type:'ProjectApproval',
-              imgUrl: "",
+              impurl:
+                  "{\"type\":\"UniversalProjectApproval\",\"flowType\":61,\"url\":\"getWorkFlowDetail\",\"createRoute\":\"UniversalProjectApproval\",\"createKey\":[\"Flow:UniversalProjectApproval\"],\"listdataurl\":\"getTodoList\",\"keys\":[\"flowtype\",\"processinstanceid\"],\"permissions\":{\"viewDataModeKey\":\"View:UniversalProjectApproval:DataMode\"}}",
               name: "立项",
               route: 'todolist/ProjectApproval'
             },
@@ -36,7 +37,7 @@ export default [
               flowType: 3,
               muduleName: "开票",
               type:'Invoice',
-              imgUrl: "",
+              impurl: "",
               name: "开票",
               route: 'todolist/ProjectApproval'
             },
@@ -45,7 +46,8 @@ export default [
               flowType: 4,
               muduleName: "结算单",
               type:'Statement',
-              imgUrl: "",
+              impurl:
+                  "{\"type\":\"OuterStatement\",\"flowType\":75,\"url\":\"getWorkFlowDetail\",\"createRoute\":\"OuterStatement\",\"createKey\":[\"Create:OuterStatement\"],\"listdataurl\":\"getTodoList\",\"keys\":[\"flowtype\",\"processinstanceid\"],\"permissions\":{}}",
               name: "结算单",
               route: 'todolist/OuterStatement'
             },

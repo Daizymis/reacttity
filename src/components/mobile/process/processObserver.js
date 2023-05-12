@@ -5,7 +5,7 @@ export function ProcessObserver({ observer }) {
       <p className="progress-observer--title font-PF-medium">流程观察者</p>
       <div className="observer-list">
         {observer.map((item, index) => (
-          <div key={index} className={"observer - name"}>
+          <div key={index} className="observer-name">
             {item.name}
           </div>
         ))}

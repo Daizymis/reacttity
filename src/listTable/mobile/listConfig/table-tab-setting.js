@@ -72,7 +72,7 @@ export const tabTitleSettingOfRequstFunds = [
   {
     key: 0,
     value: 0,
-    lvalue: "<i class='yfont_red'>未处理</i>",
+    lvalue: "<i className='yfont_red'>未处理</i>",
     title: i18n.t("listPage.fstatus0"),
     listdataurl: getProcessingList,
     orderNameSelf: "createtime",
@@ -87,25 +87,25 @@ export const tabTitleSettingOfRequstFunds = [
   },
   {
     value: 4,
-    lvalue: "<i class='yfont_blue'>需关注</i>",
+    lvalue: "<i className='yfont_blue'>需关注</i>",
     title: i18n.t("listPage.fstatus4"),
     listdataurl: getNeedAttentionList,
   },
   {
     value: 1,
-    lvalue: "<i class='yfont_green'>已处理</i>",
+    lvalue: "<i className='yfont_green'>已处理</i>",
     title: i18n.t("listPage.fstatus1"),
     listdataurl: getProcessedList,
   },
   {
     value: 2,
-    lvalue: "<i class='yfont_blue'>我发起的</i>",
+    lvalue: "<i className='yfont_blue'>我发起的</i>",
     title: i18n.t("listPage.fstatus2"),
     listdataurl: getMyProcessList,
   },
   {
     value: 6,
-    lvalue: "<i class='yfont_red'>发起人已撤回</i>",
+    lvalue: "<i className='yfont_red'>发起人已撤回</i>",
     title: i18n.t("listPage.fstatus3"),
     listdataurl: getRetractedList,
   },

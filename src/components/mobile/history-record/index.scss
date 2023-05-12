@@ -1,0 +1,24 @@
+.history {
+  //padding: 0.3rem 0.3rem 0 0.44rem;
+  &-title {
+    margin: 0.3rem 0.3rem 0 0.3rem;
+    font-size: 0.35rem;
+  }
+  &-detail {
+    font-size: 0.28rem;
+    //font-family: 'PingFangSC-Medium';
+    &-info {
+      margin: 0 0.3rem 0 0.3rem;
+    }
+    &-item {
+      margin-top: 0.3rem;
+      word-break: break-all;
+    }
+    &-divider {
+      width: 100%;
+      height: 0.01rem;
+      background-color: #d9d9d9;
+      margin-top: 0.37rem;
+    }
+  }
+}

@@ -28,6 +28,8 @@ import { useTranslation } from "react-i18next";
 import { StatementList } from "./child/statementList";
 import {ProcessObserver} from "../../../components/mobile/process/processObserver";
 import {Participant} from "../../../components/mobile/process/participant";
+import {HistoryRecord} from "../../../components/mobile/history-record";
+import {RejectReason} from "../../../components/mobile/reject-reason";
 function OuterStatement(props) {
   const flowType = FLOWTYPE.OTERSTATEMENT;
   const { dataAdapt } = props;
@@ -57,7 +59,7 @@ function OuterStatement(props) {
     });
   };
   const getSelectData = () => {
-    http.post("api/" + createWorkFlowUrl + flowType, {}).then((res) => {
+    http.post("api" + createWorkFlowUrl + flowType, {}).then((res) => {
       setSelectData(res.data);
     });
   };
@@ -483,6 +485,18 @@ function OuterStatement(props) {
                     <ModifyRecord records={getData.modifyLogs}></ModifyRecord>
                   )
                 );
+              case getPublicMenuIndex("history") + "":
+                return (
+                    getData && (
+                        <HistoryRecord records={getData.historyData}></HistoryRecord>
+                    )
+                );
+              case getPublicMenuIndex('rejectReason') + "":
+                return (
+                    getData && (
+                        <RejectReason reason={getData.workflowEntity.rejectreson}></RejectReason>
+                    )
+                )
               default:
                 return null;
             }
