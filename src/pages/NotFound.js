@@ -6,7 +6,7 @@ export default function NotFound() {
     <div>
       <p>oops！！！您所看的页面不存在</p>
       <p>
-        <Link to="/login">Go to the home page</Link>
+        <Link to="/">Go to the home page</Link>
       </p>
     </div>
   );

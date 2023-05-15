@@ -1,6 +1,7 @@
 import {Navigate, useRoutes} from "react-router";
 import React, {Suspense} from "react";
 import Loading from "../../pages/mobile/Loading";
+import NotFound from "../../pages/NotFound";
 const Menu = React.lazy(() => import("@/pages/pc/Menu"));
 
 const routerConfig = [
@@ -15,6 +16,10 @@ const routerConfig = [
                 <Menu />
             </Suspense>
         ),
+    },
+    {
+        path: "*",
+        element: <NotFound />,
     },
 ];
 

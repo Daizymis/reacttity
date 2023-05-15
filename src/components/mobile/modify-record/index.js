@@ -16,12 +16,12 @@ const ModifyRecord = ({ records }) => {
       return <span className="font-color">{itemL.modifyKey}</span>;
     } else {
       return (
-        <template>
+        <div>
           将<span className="font-color">{itemL.modifyKey}</span>由
           <span className="font-color">{_none(itemL.before)}</span>
           改为
           <span className="font-color">{_none(itemL.after)}</span>
-        </template>
+        </div>
       );
     }
   };

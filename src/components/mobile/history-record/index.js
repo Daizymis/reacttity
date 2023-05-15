@@ -29,9 +29,9 @@ export function HistoryRecord({ records = [] }) {
                             recordTitleList.map((itemT, index) =>
                                 <div key={index} className="history-detail-info">
                                     <Grid columns={3} gap={8} >
-                                        <Grid.Item span={10} className="history-detail-item">{ itemT.label }</Grid.Item>
-                                        <Grid.Item span={14} className="history-detail-item text-align-right">
-                                            { itemT.key === 'status' ? <template>
+                                        <Grid.Item className="history-detail-item">{ itemT.label }</Grid.Item>
+                                        <Grid.Item span={2} className="history-detail-item text-align-right">
+                                            { itemT.key === 'status' ? <span>
                                                     {item.status === 0 && item.isrefund !== 1 &&
                                                     <p style={{color: '#f9c247'}}>已提交</p>}
                                                     {item.status === 1 && <p style={{color: '#f9c247'}}>处理中</p>}
@@ -46,10 +46,10 @@ export function HistoryRecord({ records = [] }) {
                                                     <p style={{color: 'red'}}>退票已驳回</p>}
                                                     {item.status === 2 && item.isrefund === 1 &&
                                                     <p style={{color: 'green'}}>已退票</p>}
-                                                </template>
-                                                : <template>
+                                                </span>
+                                                : <span>
                                                     {item[itemT.key] || '/'}
-                                                </template>}
+                                                </span>}
                                         </Grid.Item>
                                     </Grid>
                                 </div>)
