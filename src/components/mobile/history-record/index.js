@@ -23,8 +23,8 @@ export function HistoryRecord({ records = [] }) {
         <div className={style.history}>
             <p className="history-title font-PF-medium">  {`历史记录（${records?.length}）`}</p>
             {
-                records.map(item =>
-                    <div key={item.id} className="history-detail">
+                records.map((item, index) =>
+                    <div key={item.id + index} className="history-detail">
                         {
                             recordTitleList.map((itemT, index) =>
                                 <div key={index} className="history-detail-info">

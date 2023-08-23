@@ -11,7 +11,7 @@ export default [
       let request = JSON.parse(config.body);
       if (request.username === "guest" && request.password === "guest") {
         return {
-          code: 200,
+          code: 201,
           token: "youaretheappleinmyeyes",
           userInfo:
             {id:1,caid:1,"empid":"1","deptid":"1","name":"guest","leadercaid":544,"leadername":"mary"},
