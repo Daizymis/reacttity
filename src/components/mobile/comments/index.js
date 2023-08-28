@@ -187,7 +187,7 @@ export const Comments = (props) => {
                 )}
             </Popup>
             {showPicker &&
-            <Filter setShowPicker={setShowPicker} placeholder={'请输入'} options={recipients} filterable={true} defaultValue={defaultValue}
+            <Filter setShowPicker={setShowPicker} placeholder={'请输入'} filterable={true} defaultValue={defaultValue}
                     label="name" search-value="item" confirm={confirmEmlNode}>
                 {
                     recipients.map(item => ({

@@ -20,28 +20,28 @@ export default [
                     "attachments": [],
                     "comments": [],
                     "Recipients": [{
-                        "id": 472,
-                        "caid": 549,
-                        "name": "jun.xiao",
-                        "email": "jun.xiao@cue.group1",
+                        "id": 1,
+                        "caid": 1,
+                        "name": "xun.wu",
                         "empid": "0015",
                         "deptid": "N9999",
                         "photourl": "0015.jpg"
                     }, {
-                        "id": 487,
-                        "caid": 561,
-                        "name": "xia.lin",
-                        "email": "xia.lin@cue.group1",
+                        "id": 2,
+                        "caid": 2,
+                        "name": "xun.lin",
                         "empid": "0090",
                         "deptid": "N9999",
                         "photourl": "0090.jpg"
-                    }, {"caid": 544, "name": "施侃", "email": "kshi@cue.group1"}, {
-                        "caid": 933,
-                        "name": "郑飞",
-                        "email": "fei.zheng@cue.group1"
-                    }, {"caid": 586, "name": "王勇刚", "email": "yonggang.wang@cue.group1"}, {
-                        "caid": 20005,
-                        "name": "BI测试账号",
+                    }, {"caid": 3, "name": "xiaobai",}, {
+                        "caid": 3,
+                        "name": "xiaoran",
+                    },
+                        {"id": 4,"caid": 4, "name": "lili", },
+                        {
+                            "id": 5,
+                        "caid": 5,
+                        "name": "test",
                         "email": "bi_test@cue.group1"
                     }],
                     "workflowEntity": {
