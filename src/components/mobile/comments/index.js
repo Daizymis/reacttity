@@ -109,7 +109,7 @@ export const Comments = (props) => {
                             <p className="detail-name">{item.empname}</p>
                             <p className="detail-content">{item.contents}</p>
                             <div className="detail-upload">
-                                {/*<upload-attachment
+                               {/* <upload-attachment
                                 v-if="item.attachments.length > 0"
                             :is-upload="false"
                             :attachments="item.attachments"

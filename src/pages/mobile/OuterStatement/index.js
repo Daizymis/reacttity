@@ -30,6 +30,7 @@ import {ProcessObserver} from "../../../components/mobile/process/processObserve
 import {Participant} from "../../../components/mobile/process/participant";
 import {HistoryRecord} from "../../../components/mobile/history-record";
 import {RejectReason} from "../../../components/mobile/reject-reason";
+import Attachment from "../../../components/mobile/attachments";
 function OuterStatement(props) {
   const flowType = FLOWTYPE.OTERSTATEMENT;
   const { dataAdapt } = props;
@@ -396,6 +397,7 @@ function OuterStatement(props) {
                       </Grid.Item>
                       <Grid.Item span={2} className="content-content">
                         {/*<attachment-index :attachments="postData.custConfirmFiles" :is-upload="false" />*/}
+                        <Attachment attachments={postData.custConfirmFiles}></Attachment>
                       </Grid.Item>
                       {/*</Grid>*/}
                       {/*<Grid className="detail-row content-title">*/}

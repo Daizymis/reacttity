@@ -3,6 +3,8 @@ import workspaceDefault from "@/assets/img/mobile/icon-workbench.png";
 import workspaceActive from "@/assets/img/mobile/icon-workbench-click.png";
 import myDefault from "@/assets/img/mobile/my.png";
 import myActive from "@/assets/img/mobile/my-click.png";
+import notificationDefault from '@/assets/img/mobile/icon-notification.png';
+import notificationActive from '@/assets/img/mobile/icon-notification-active.png';
 import axios from "axios";
 import { Outlet } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
@@ -28,6 +30,13 @@ function Layout(props) {
     //   },
     // }).then((res) => {
     setFootMenu([
+      {
+        img: notificationDefault,
+        imgActive: notificationActive,
+        name: '通知',
+        url: '/notificationCenter',
+        showCount: true
+      },
       {
         img: workspaceDefault,
         imgActive: workspaceActive,

@@ -18,7 +18,6 @@ import { setDataAdapt, setListDataAdapt } from "../../../store/action";
 import listConfig from "../../../listTable/mobile/listConfig";
 function TodoList(props) {
   let { listDataAdapt, setListDataAdapt, dataAdapt, setDataAdapt } = props;
-  const listFilter = useRef();
   let { type } = useParams();
   const [data, setData] = useState({
     listData: [],
@@ -87,7 +86,6 @@ function TodoList(props) {
       ordername: val.orderName,
       orderby: val.orderBy,
     }));
-    // listFilter.current.reset();
   };
   const dealFormatList = async () => {
     let listItem = listKeys.listItem;
@@ -210,7 +208,6 @@ function TodoList(props) {
       {useMemo(() => {
         return (
           <TopFilter
-            ref={listFilter}
             listKeys={listKeys}
             changeListType={changeListType}
             setFilterVisible={setFilterVisible}
